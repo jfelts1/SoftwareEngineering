@@ -22,7 +22,7 @@ void GenerateMines::generateField(const int x, const int y)
 	std::mt19937 gen;
 	for (auto& i : m_mineField)
 	{
-		for (auto& vec : i)
+		for (auto vec : i)
 		{
 			vec = !static_cast<bool>(rand(gen));
 		}
