@@ -1,4 +1,4 @@
-//compiles with VS 2015
+//compiles with VS 2015 and g++5
 #include <cstdlib>
 #include <utility>
 #include "GenerateMines.h"
@@ -10,9 +10,9 @@ int main()
 	
 	std::ofstream fout;
 	fout.open("out.txt", fout.out);
-	for (int i = 0;i <= ARRAY_MAX;i++)
+	for (int i = ARRAY_MAX;i >=0;i--)
 	{
-		for (int j = 0;j <= ARRAY_MAX;j++)
+		for (int j = ARRAY_MAX;j >=0;j--)
 		{
 			fout << i << " " << j << std::endl;
 			mines.generateField(i, j);

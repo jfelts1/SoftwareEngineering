@@ -1,4 +1,4 @@
-//StringUtils is from my game
+//StringUtils and FileUtils is from my game
 #include <cstdlib>
 #include <iostream>
 #include <string>
@@ -6,6 +6,7 @@
 #include "Utils/StringUtils.h"
 #include "Utils/FileUtils.h"
 #include "Utils/ConsoleUtils.h"
+#include "MineField.h"
 
 using std::string;
 using std::vector;
