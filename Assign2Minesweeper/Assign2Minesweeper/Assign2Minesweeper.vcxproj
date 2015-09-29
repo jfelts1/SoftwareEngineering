@@ -118,6 +118,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="MineField.h" />
+    <ClInclude Include="Utils\ConsoleUtils.h" />
+    <ClInclude Include="Utils\FileUtils.h" />
+    <ClInclude Include="Utils\StringUtils.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="MineField.cpp" />
+    <ClCompile Include="Utils\ConsoleUtils.cpp" />
+    <ClCompile Include="Utils\FileUtils.cpp" />
+    <ClCompile Include="Utils\StringUtils.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

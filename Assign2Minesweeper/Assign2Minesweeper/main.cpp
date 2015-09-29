@@ -13,6 +13,13 @@ using std::vector;
 
 int main()
 {
+	int check = 0;
+	//cuts the output time by a factor of 10 or so on windows!
+	check = setvbuf(stdout, NULL, _IOFBF, 10000);
+	if (check != 0)
+	{
+		std::cerr << "Unable to set buffer size" << std::endl;
+	}
 	string in;
 	//in = Utils::readFileAsText("out.txt");
 	in = Utils::readInput();
