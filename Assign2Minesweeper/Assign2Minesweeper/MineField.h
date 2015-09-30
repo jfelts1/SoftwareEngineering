@@ -3,7 +3,7 @@
 #include <vector>
 #include <string>
 #include <sstream>
-#include "typedefs.h"
+#include "Typedefs.h"
 #define MINE -1
 
 class MineField
@@ -15,6 +15,8 @@ public:
 private:
 	std::vector<std::vector<byte>> m_fieldData;
 	int m_fieldNum;
+	static std::vector<byte> getMineData(const std::vector<std::string> stringData);
+	static std::vector<std::vector<std::string>> getStringData(const std::vector<std::string> stringVec);
 };
 
 #endif

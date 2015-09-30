@@ -25,7 +25,7 @@ int main()
 	//in = Utils::readFileAsText("out.txt");
 	in = Utils::readInput();
 	vector<string> splitIn = Utils::splitString(in,'\n');
-	
+	std::vector<MineField> mineFields = MineField::getMineFields(splitIn);
 	for(auto& str: splitIn)
 	{
 		std::cout<<str<<std::endl;
