@@ -7,6 +7,7 @@
 #include "Utils/FileUtils.h"
 #include "Utils/ConsoleUtils.h"
 #include "MineField.h"
+#define CONSOLE_BUFFER_SIZE 10000
 
 using std::string;
 using std::vector;
@@ -15,7 +16,7 @@ int main()
 {
 	int check = 0;
 	//cuts the output time by a factor of 10 or so on windows!
-	check = setvbuf(stdout, NULL, _IOFBF, 10000);
+	check = setvbuf(stdout, NULL, _IOFBF, CONSOLE_BUFFER_SIZE);
 	if (check != 0)
 	{
 		std::cerr << "Unable to set buffer size" << std::endl;
