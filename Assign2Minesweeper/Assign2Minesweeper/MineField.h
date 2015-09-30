@@ -3,20 +3,24 @@
 #include <vector>
 #include <string>
 #include <sstream>
+#include <algorithm>
 #include "Typedefs.h"
 #define MINE -1
 
 class MineField
 {
 public:
-	MineField(const std::vector<std::vector<byte>> fieldData, const int fieldNum) :m_fieldData(fieldData), m_fieldNum(fieldNum) {};
+	MineField(const mineFieldData fieldData, const int fieldNum) :m_fieldData(fieldData), m_fieldNum(fieldNum) {};
 	virtual ~MineField();
-	static std::vector<MineField> getMineFields(const std::vector<std::string> stringVec);
+	//returns a vector of all the Minefields
+	static std::vector<MineField> getMineFields(const std::vector<std::string>& stringVec);
 private:
-	std::vector<std::vector<byte>> m_fieldData;
+	mineFieldData m_fieldData;
 	int m_fieldNum;
-	static std::vector<byte> getMineData(const std::vector<std::string> stringData);
-	static std::vector<std::vector<std::string>> getStringData(const std::vector<std::string> stringVec);
+	//returns the mineFieldData from the given string data
+	static mineFieldData getMineData(const std::vector<std::string>& stringData);
+	static std::vector<std::vector<std::string>> getStringData(const std::vector<std::string>& stringVec);
+	static void updateMineField(mineFieldData& fieldData, std::vector<point>& minePos);
 };
 
 #endif

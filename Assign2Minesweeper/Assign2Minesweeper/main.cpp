@@ -1,4 +1,5 @@
 //StringUtils and FileUtils is from my game
+//compiles using VS 2015 and g++-5
 #include <cstdlib>
 #include <iostream>
 #include <string>
