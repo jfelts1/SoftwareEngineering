@@ -12,7 +12,7 @@ std::vector<MineField> MineField::getMineFields(const std::vector<std::string>& 
 	vector<MineField> ret;
 	//vector<vector<byte>> fieldData;
 	
-	int count = 0;
+	int count = 1;
 	std::vector<std::vector<std::string>> stringData = getStringData(stringVec);
 	mineFieldData mineData;
 	for(auto& mineDataString : stringData)
@@ -68,10 +68,16 @@ std::vector<std::vector<std::string>> MineField::getStringData(const std::vector
 		
 		if((x!=0 && y!=0)||(x!=0 || y!=0))
 		{
-			ret.emplace_back(mineDataString);
+			//exclude all fields with zero sizes
+			if(mineDataString.size()!=0)
+			{	
+				if(mineDataString[0].size() != 0)
+				{
+					ret.emplace_back(mineDataString);
+				}
+			}
 			mineDataString.clear();
 		}
-		//don't read the lines with numbers
 		else if (x == 0 && y == 0)
 		{
 			mineDataString.emplace_back(strRow);

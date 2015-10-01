@@ -28,9 +28,9 @@ int main()
 	string in;
 	//in = Utils::readFileAsText("in.txt");
 	in = Utils::readInput();
-	cout << "read in successfully" << endl;
+	//cout << "read in successfully" << endl;
 	vector<string> splitIn = Utils::splitString(in,'\n');
-	cout << "split successfully" << endl;
+	//cout << "split successfully" << endl;
 	std::vector<MineField> mineFields = MineField::getMineFields(splitIn);
 	for(auto& field :mineFields)
 	{
