@@ -31,31 +31,34 @@ namespace Utils
 	//returns the passed string with whitespace removed from the begining
 	inline std::string ltrim(std::string& str)
 	{
-		int i = 0;
-		while (isspace((unsigned char)str.front()))
+		if(str != "")
 		{
-			str.erase(i, 1);
-			i++;
+			int i = 0;
+			while (isspace((unsigned char)str.front()))
+			{
+				str.erase(i, 1);
+				i++;
+			}
 		}
 		return str;
 	}
 	//returns the passed string with whitespace removed from the end
 	inline std::string rtrim(std::string& str)
 	{
-		while (isspace((unsigned char)str.back()))
+		if(str != "")
 		{
-			str.pop_back();
+			while (isspace((unsigned char)str.back()))
+			{
+				str.pop_back();
+			}
 		}
 		return str;
 	}
 	//returns the passed string with whitespace removed from the begining and end
 	inline std::string trim(std::string str)
 	{
-		if (str != "")
-		{
-			Utils::ltrim(str);
-			Utils::rtrim(str);
-		}
+		Utils::ltrim(str);
+		Utils::rtrim(str);
 		return str;
 	}
 	
