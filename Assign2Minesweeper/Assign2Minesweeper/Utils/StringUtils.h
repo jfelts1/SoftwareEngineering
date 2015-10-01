@@ -51,8 +51,11 @@ namespace Utils
 	//returns the passed string with whitespace removed from the begining and end
 	inline std::string trim(std::string str)
 	{
-		Utils::ltrim(str);
-		Utils::rtrim(str);
+		if (str != "")
+		{
+			Utils::ltrim(str);
+			Utils::rtrim(str);
+		}
 		return str;
 	}
 	

@@ -1,6 +1,7 @@
 //StringUtils and FileUtils is from my game
 //compiles using VS 2015 and g++-5
 #include <cstdlib>
+#include <cstring>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -12,6 +13,8 @@
 
 using std::string;
 using std::vector;
+using std::cout;
+using std::endl;
 
 int main()
 {
@@ -23,13 +26,15 @@ int main()
 		std::cerr << "Unable to set buffer size" << std::endl;
 	}
 	string in;
-	//in = Utils::readFileAsText("out.txt");
+	//in = Utils::readFileAsText("in.txt");
 	in = Utils::readInput();
+	cout << "read in successfully" << endl;
 	vector<string> splitIn = Utils::splitString(in,'\n');
+	cout << "split successfully" << endl;
 	std::vector<MineField> mineFields = MineField::getMineFields(splitIn);
-	for(auto& str: splitIn)
+	for(auto& field :mineFields)
 	{
-		std::cout<<str<<std::endl;
+		cout<<field<<endl;
 	}
 	return EXIT_SUCCESS;
 }
