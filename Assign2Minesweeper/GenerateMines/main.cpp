@@ -9,7 +9,7 @@ int main()
 	GenerateMines mines;
 	
 	std::ofstream fout;
-	fout.open("out.txt", fout.out);
+	fout.open("in.txt", fout.out);
 	for (int i = ARRAY_MAX;i >=0;i--)
 	{
 		for (int j = ARRAY_MAX;j >=0;j--)
