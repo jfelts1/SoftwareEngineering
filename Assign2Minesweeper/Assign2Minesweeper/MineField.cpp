@@ -66,7 +66,7 @@ std::vector<std::vector<std::string>> MineField::getStringData(const std::vector
 		tmp >> x;
 		tmp >> y;
 		
-		if((x!=0 && y!=0)||(x!=0 || y!=0))
+		if(x!=0 || y!=0)
 		{
 			//exclude all fields with zero sizes
 			if(mineDataString.size()!=0)

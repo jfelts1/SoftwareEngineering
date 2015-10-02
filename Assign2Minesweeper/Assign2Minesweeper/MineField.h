@@ -14,7 +14,7 @@ class MineField
 {
 	friend inline std::ostream& operator<<(std::ostream& out, const MineField& mineField)
 	{
-		out << "Field#" << mineField.m_fieldNum << std::endl;
+		out << "Field# " << mineField.m_fieldNum <<":"<< std::endl;
 		for (auto& i : mineField.m_fieldData)
 		{
 			for (auto& by : i)

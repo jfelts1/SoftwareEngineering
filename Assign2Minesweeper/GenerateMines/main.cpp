@@ -10,15 +10,17 @@ int main()
 	
 	std::ofstream fout;
 	fout.open("in.txt", fout.out);
-	for (int i = ARRAY_MAX;i >=0;i--)
+	for (int i = ARRAY_MAX;i >0;i--)
 	{
-		for (int j = ARRAY_MAX;j >=0;j--)
+		for (int j = ARRAY_MAX;j >0;j--)
 		{
 			fout << i << " " << j << std::endl;
 			mines.generateField(i, j);
 			fout << mines;
 		}
 	}
+	fout << 0 << " " << 0 << std::endl;
+	
 	fout.close();
 	return EXIT_SUCCESS;
 }
