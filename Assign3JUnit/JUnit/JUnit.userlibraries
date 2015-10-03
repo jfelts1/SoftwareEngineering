@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eclipse-userlibraries>
+  <library name="testng">
+    <archive path="/home/james/Downloads/idea-IC-141.2735.5/plugins/testng/lib/testng.jar" />
+    <archive path="/home/james/Downloads/idea-IC-141.2735.5/plugins/testng/lib/testng-plugin.jar" />
+  </library>
+  <library name="junit">
+    <archive path="/home/james/Downloads/idea-IC-141.2735.5/lib/junit.jar" />
+  </library>
+  <library name="junit-4.11">
+    <archive path="/home/james/Downloads/idea-IC-141.2735.5/lib/junit-4.11.jar" />
+  </library>
+</eclipse-userlibraries>
+
