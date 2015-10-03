@@ -26,8 +26,8 @@ int main()
 		std::cerr << "Unable to set buffer size" << std::endl;
 	}
 	string in;
-	//in = Utils::readFileAsText("in.txt");
-	in = Utils::readInput();
+	in = Utils::readFileAsText("in.txt");
+	//in = Utils::readInput();
 	//cout << "read in successfully" << endl;
 	vector<string> splitIn = Utils::splitString(in,'\n');
 	//cout << "split successfully" << endl;

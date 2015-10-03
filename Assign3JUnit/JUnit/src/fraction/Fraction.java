@@ -21,34 +21,28 @@ public class Fraction implements Comparable<Fraction>
         {
             m_sign = !m_sign;
         }
-        if(m_sign)
-        {
-            m_num = Math.abs(num);
-            m_den = Math.abs(den);
-        }
-        else
-        {
-            m_num = num;
-            m_den = den;
-        }
+
+        m_num = Math.abs(num);
+        m_den = Math.abs(den);
+
         reduceFraction();
     }
 
     public long getDen()
     {
-        if(m_sign)
+        /*if(!m_sign)
         {
-            return m_den;
-        }
-        return getSignAsInt()*m_den;
+            return -m_den;
+        }*/
+        return m_den;
     }
     public long getNum()
     {
-        if(m_sign)
+        if(!m_sign)
         {
-            return m_num;
+            return -m_num;
         }
-        return getSignAsInt()*m_num;
+        return m_num;
     }
     public boolean getSign() {return m_sign;}
 
@@ -88,22 +82,8 @@ public class Fraction implements Comparable<Fraction>
     @Override
     public int compareTo(Fraction fraction)
     {
-        int ret;
-        if(m_num==fraction.m_num && m_den == fraction.m_den)
-        {
-            ret = 0;
-        }
-        else if(m_num*fraction.m_den < m_den*fraction.m_num)
-        {
-            ret = -1;
-        }
-        //can only be equal less than or greater than
-        else
-        {
-            ret = 1;
-        }
-
-        return ret;
+        //forced narrowing to int due to interface expecting int but i'm using long to store data
+        return (int)(m_num*fraction.m_den-m_den*fraction.m_num);
     }
 
     @Override
@@ -114,9 +94,9 @@ public class Fraction implements Comparable<Fraction>
         {
             ret.append('-');
         }
-        ret.append(m_num);
+        ret.append(Math.abs(m_num));
         ret.append('/');
-        ret.append(m_den);
+        ret.append(Math.abs(m_den));
         return ret.toString();
     }
 
@@ -141,7 +121,9 @@ public class Fraction implements Comparable<Fraction>
         return result;
     }
 
-    /////privates start here////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////privates start here////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private long m_den;
     private long m_num;
     //true positive false negative
@@ -164,6 +146,6 @@ public class Fraction implements Comparable<Fraction>
 
     private int getSignAsInt()
     {
-        return m_sign?1:-1;
+        return m_sign?-1:1;
     }
 }
