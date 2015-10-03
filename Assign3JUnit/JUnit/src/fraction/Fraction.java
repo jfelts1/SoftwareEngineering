@@ -1,5 +1,6 @@
 package fraction;
 
+import java.awt.*;
 import java.math.BigInteger;
 
 /**
@@ -55,8 +56,8 @@ public class Fraction implements Comparable<Fraction>
         long num,den;
         int sign1 = getSignAsInt();
         int sign2 = fraction.getSignAsInt();
-        num = sign1*m_num*fraction.m_den+sign2*m_den*fraction.m_num;
-        den = m_den*fraction.m_num;
+        num = sign1*m_num*fraction.m_den+sign2*fraction.m_num*m_den;
+        den = m_den*fraction.m_den;
         return new Fraction(num,den);
     }
 
@@ -146,6 +147,6 @@ public class Fraction implements Comparable<Fraction>
 
     private int getSignAsInt()
     {
-        return m_sign?-1:1;
+        return m_sign?1:-1;
     }
 }

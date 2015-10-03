@@ -3,10 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1208af7a-232b-4bf1-b047-6e1691a62f22" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/JUnit/fraction/Fraction.class" afterPath="$PROJECT_DIR$/out/production/JUnit/fraction/Fraction.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/JUnit/fraction/FractionTest.class" afterPath="$PROJECT_DIR$/out/production/JUnit/fraction/FractionTest.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/JUnit/fraction/IllegalArgument.class" afterPath="$PROJECT_DIR$/out/production/JUnit/fraction/IllegalArgument.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/fraction/Fraction.java" afterPath="$PROJECT_DIR$/src/fraction/Fraction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../Assign2Minesweeper/Assign2Minesweeper/main.cpp" afterPath="$PROJECT_DIR$/../../Assign2Minesweeper/Assign2Minesweeper/main.cpp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="JUnit.iws" />
@@ -21,7 +18,7 @@
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/JUnit$FractionTest__1_.coverage" NAME="FractionTest (1) Coverage Results" MODIFIED="1443848248063" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/JUnit$FractionTest__1_.coverage" NAME="FractionTest (1) Coverage Results" MODIFIED="1443863640083" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>fraction.*</FILTER>
     </SUITE>
   </component>
@@ -37,13 +34,14 @@
       <file leaf-file-name="Fraction.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/fraction/Fraction.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5199468">
-              <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+            <state vertical-scroll-proportion="1.2885638">
+              <caret line="57" column="44" selection-start-line="57" selection-start-column="44" selection-end-line="57" selection-end-column="44" />
               <folding>
-                <element signature="e#1805#1806#0" expanded="true" />
-                <element signature="e#1855#1856#0" expanded="true" />
-                <element signature="e#4077#4078#0" expanded="true" />
-                <element signature="e#4111#4112#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#1824#1825#0" expanded="true" />
+                <element signature="e#1874#1875#0" expanded="true" />
+                <element signature="e#4096#4097#0" expanded="true" />
+                <element signature="e#4130#4131#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -442,7 +440,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1176" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -452,7 +450,7 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26966292" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26966292" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19270833" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -507,10 +505,11 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#1805#1806#0" expanded="true" />
-            <element signature="e#1855#1856#0" expanded="true" />
-            <element signature="e#4077#4078#0" expanded="true" />
-            <element signature="e#4111#4112#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#1824#1825#0" expanded="true" />
+            <element signature="e#1874#1875#0" expanded="true" />
+            <element signature="e#4096#4097#0" expanded="true" />
+            <element signature="e#4130#4131#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -538,10 +537,11 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="45" column="5" selection-start-line="45" selection-start-column="5" selection-end-line="45" selection-end-column="5" />
           <folding>
-            <element signature="e#1805#1806#0" expanded="true" />
-            <element signature="e#1855#1856#0" expanded="true" />
-            <element signature="e#4077#4078#0" expanded="true" />
-            <element signature="e#4111#4112#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#1824#1825#0" expanded="true" />
+            <element signature="e#1874#1875#0" expanded="true" />
+            <element signature="e#4096#4097#0" expanded="true" />
+            <element signature="e#4130#4131#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -569,10 +569,11 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="48" column="25" selection-start-line="48" selection-start-column="25" selection-end-line="48" selection-end-column="25" />
           <folding>
-            <element signature="e#1805#1806#0" expanded="true" />
-            <element signature="e#1855#1856#0" expanded="true" />
-            <element signature="e#4077#4078#0" expanded="true" />
-            <element signature="e#4111#4112#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#1824#1825#0" expanded="true" />
+            <element signature="e#1874#1875#0" expanded="true" />
+            <element signature="e#4096#4097#0" expanded="true" />
+            <element signature="e#4130#4131#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -582,10 +583,11 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#1805#1806#0" expanded="true" />
-            <element signature="e#1855#1856#0" expanded="true" />
-            <element signature="e#4077#4078#0" expanded="true" />
-            <element signature="e#4111#4112#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#1824#1825#0" expanded="true" />
+            <element signature="e#1874#1875#0" expanded="true" />
+            <element signature="e#4096#4097#0" expanded="true" />
+            <element signature="e#4130#4131#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -595,10 +597,11 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#1805#1806#0" expanded="true" />
-            <element signature="e#1855#1856#0" expanded="true" />
-            <element signature="e#4077#4078#0" expanded="true" />
-            <element signature="e#4111#4112#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#1824#1825#0" expanded="true" />
+            <element signature="e#1874#1875#0" expanded="true" />
+            <element signature="e#4096#4097#0" expanded="true" />
+            <element signature="e#4130#4131#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -608,10 +611,11 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#1805#1806#0" expanded="true" />
-            <element signature="e#1855#1856#0" expanded="true" />
-            <element signature="e#4077#4078#0" expanded="true" />
-            <element signature="e#4111#4112#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#1824#1825#0" expanded="true" />
+            <element signature="e#1874#1875#0" expanded="true" />
+            <element signature="e#4096#4097#0" expanded="true" />
+            <element signature="e#4130#4131#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -621,11 +625,20 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#1805#1806#0" expanded="true" />
-            <element signature="e#1855#1856#0" expanded="true" />
-            <element signature="e#4077#4078#0" expanded="true" />
-            <element signature="e#4111#4112#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#1824#1825#0" expanded="true" />
+            <element signature="e#1874#1875#0" expanded="true" />
+            <element signature="e#4096#4097#0" expanded="true" />
+            <element signature="e#4130#4131#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/fraction/FractionTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="60" column="43" selection-start-line="60" selection-start-column="43" selection-end-line="60" selection-end-column="43" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -639,23 +652,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/fraction/FractionTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="60" column="43" selection-start-line="60" selection-start-column="43" selection-end-line="60" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/fraction/Fraction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5199468">
-          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+        <state vertical-scroll-proportion="1.2885638">
+          <caret line="57" column="44" selection-start-line="57" selection-start-column="44" selection-end-line="57" selection-end-column="44" />
           <folding>
-            <element signature="e#1805#1806#0" expanded="true" />
-            <element signature="e#1855#1856#0" expanded="true" />
-            <element signature="e#4077#4078#0" expanded="true" />
-            <element signature="e#4111#4112#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#1824#1825#0" expanded="true" />
+            <element signature="e#1874#1875#0" expanded="true" />
+            <element signature="e#4096#4097#0" expanded="true" />
+            <element signature="e#4130#4131#0" expanded="true" />
           </folding>
         </state>
       </provider>
