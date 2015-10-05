@@ -1,3 +1,7 @@
+/*
+James Felts
+Tests that the Fraction class throws exceptions when necessary
+ */
 package fraction;
 
 import static org.junit.Assert.*;

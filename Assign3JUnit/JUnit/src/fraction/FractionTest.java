@@ -1,3 +1,7 @@
+/*
+James Felts
+Tests the behaviour and accuracy of the Fraction class
+ */
 package fraction;
 
 import static org.junit.Assert.*;

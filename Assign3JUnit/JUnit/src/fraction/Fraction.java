@@ -1,3 +1,7 @@
+/*
+James Felts
+implementation of Fraction that passed all tests
+*/
 package fraction;
 
 import java.awt.*;
@@ -83,7 +87,7 @@ public class Fraction implements Comparable<Fraction>
     @Override
     public int compareTo(Fraction fraction)
     {
-        //forced narrowing to int due to interface expecting int but i'm using long to store data
+        //forced narrowing to int due to compareTo interface expecting int but i'm using long to store data
         return (int)(m_num*fraction.m_den-m_den*fraction.m_num);
     }
 
