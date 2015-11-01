@@ -1,0 +1,14 @@
+﻿<Window x:Name="QuickSearchWindow1" x:Class="FinalProjMediaPlayer.QuickSearchWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FinalProjMediaPlayer"
+        mc:Ignorable="d"
+        Title="QuickSearch" Height="100" Width="300" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" ShowInTaskbar="False" WindowStyle="ToolWindow" KeyDown="QuickSearchWindow1_KeyDown">
+    <Grid x:Name="GridQuickSearchWindow">
+        <Button x:Name="ButtonQuickSearchWindowSearch" Content="_Search" HorizontalAlignment="Left" Margin="207,38,0,0" VerticalAlignment="Top" Width="75" TabIndex="1"/>
+        <TextBox x:Name="TextBoxQuickSearchWindowSearchTextBox" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" Text="Enter name of a song to search for" VerticalAlignment="Top" Width="272" TabIndex="0"/>
+
+    </Grid>
+</Window>

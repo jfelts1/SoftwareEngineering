@@ -77,6 +77,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AdvancedSearchWindow.xaml.cs">
+      <DependentUpon>AdvancedSearchWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="QuickSearchWindow.xaml.cs">
+      <DependentUpon>QuickSearchWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="AdvancedSearchWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -86,10 +96,15 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ImageToggle.cs" />
+    <Compile Include="IToggle.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="QuickSearchWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

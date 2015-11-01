@@ -12,7 +12,10 @@
             <MenuItem x:Name="MenuItemMainWindowFile" Header="_File">
                 <MenuItem x:Name="MenuItemMainWindowFileExit" Header="E_xit" HorizontalAlignment="Left" Width="145" Click="exitProgram"/>
             </MenuItem>
-            <MenuItem x:Name="MenuItemMainWindowSearch" Header="_Search"/>
+            <MenuItem x:Name="MenuItemMainWindowSearch" Header="_Search">
+                <MenuItem x:Name="MenuItemMainWindowSearchQuickSearch" Header="_Quick Search" HorizontalAlignment="Left" Width="170" Margin="0,0,-25,0" Click="openQuickSearchWindow"/>
+                <MenuItem x:Name="MenuItemMainWindowSearchAdvancedSearch" Header="_Advanced Search" HorizontalAlignment="Left" Width="182" Margin="0,0,-37,0" Click="openAdvancedSearchWindow"/>
+            </MenuItem>
             <MenuItem x:Name="MenuItemMainWindowHelp" Header="_Help">
                 <MenuItem x:Name="MenuItemMainWindowHelpAbout" Header="_About" HorizontalAlignment="Left" Width="145" Click="openAboutWindow"/>
             </MenuItem>
@@ -26,9 +29,9 @@
         <Label x:Name="LabelMainWindowTimer" Content="00:00" HorizontalAlignment="Left" Margin="32,417,0,0" VerticalAlignment="Top"/>
         <Image x:Name="ImageMainWindowPausePlayButton" HorizontalAlignment="Left" Height="21" Margin="10,419,0,0" VerticalAlignment="Top" Width="22" Source="Icons/Symbols_Pause_16xLG.png" MouseLeftButtonDown="pausePlayToggle"/>
         <Label x:Name="LabelMainWindowQuickSearch" Content="QuickSearch" HorizontalAlignment="Left" Margin="630,394,0,0" VerticalAlignment="Top" Width="75"/>
-        <TextBox x:Name="TextBoxMainWindowQuickSearch" HorizontalAlignment="Left" Height="23" Margin="630,419,0,0" TextWrapping="Wrap" Text="Enter name of song" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="TextBoxMainWindowQuickSearch" HorizontalAlignment="Left" Height="23" Margin="630,419,0,0" TextWrapping="Wrap" Text="Enter name of a song to search for" VerticalAlignment="Top" Width="207"/>
         <Image x:Name="ImageMainWindowVolumePic" HorizontalAlignment="Left" Height="12" Margin="477,424,0,0" VerticalAlignment="Top" Width="12" Source="Icons/Soundfile_461.png" MouseLeftButtonDown="volumeOnOffToggle"/>
-        <Slider x:Name="SliderMainWindowSoundSlider" HorizontalAlignment="Left" Margin="494,418,0,0" VerticalAlignment="Top" Width="128" ValueChanged="SliderMainWindowSoundSlider_ValueChanged"/>
+        <Slider x:Name="SliderMainWindowSoundSlider" HorizontalAlignment="Left" Margin="494,418,0,0" VerticalAlignment="Top" Width="128" ValueChanged="SliderMainWindowSoundSlider_ValueChanged" Value="11"/>
 
     </Grid>
 </Window>

@@ -24,11 +24,22 @@ namespace FinalProjMediaPlayer
         public MainWindow()
         {
             InitializeComponent();
-            _pausePlayImageToggle = new ImageToggle(new BitmapImage(new Uri("pack://application:,,,/Icons/Symbols_Play_16xLG.png")),
-                                                    ref ImageMainWindowPausePlayButton);
-            _volumeOnOffImageToggle = new ImageToggle(new BitmapImage(new Uri("pack://application:,,,/Icons/SoundfileNoSound_461.png")), 
-                                                    ref ImageMainWindowVolumePic);
-            SliderMainWindowSoundSlider.Value = 100;
+            _pausePlayToggle = new ImageToggle(new BitmapImage(new Uri("pack://application:,,,/Icons/Symbols_Play_16xLG.png")),
+                                               ref ImageMainWindowPausePlayButton);
+            _volumeOnOffToggle = new ImageToggle(new BitmapImage(new Uri("pack://application:,,,/Icons/SoundfileNoSound_461.png")), 
+                                                 ref ImageMainWindowVolumePic);
+            SliderMainWindowSoundSlider.Value = 10;
+            MediaElementMainWindow.Volume = 1;
+        }
+
+        public void closeQuickSearchWindow()
+        {
+            _quickSearchWindow.Close();
+        }
+
+        public void closeAdvancedSearchWindow()
+        {
+            _advancedSearchWindow.Close();
         }
 
         private void exitProgram(object sender, RoutedEventArgs e)
@@ -38,8 +49,8 @@ namespace FinalProjMediaPlayer
 
         private void pausePlayToggle(object sender, MouseButtonEventArgs e)
         {
-            bool t = _pausePlayImageToggle.toggle();
-
+            bool t = _pausePlayToggle.toggle();
+            //TODO: do function logic
         }
 
         private void openAboutWindow(object sender, RoutedEventArgs e)
@@ -53,33 +64,49 @@ namespace FinalProjMediaPlayer
 
         private void volumeOnOffToggle(object sender, MouseButtonEventArgs e)
         {
-            bool t = _volumeOnOffImageToggle.toggle();
+            bool t = _volumeOnOffToggle.toggle();
             if (t)
             {
                 SliderMainWindowSoundSlider.Value = 0;
+                MediaElementMainWindow.Volume = 0;
             }
             else
             {
-                SliderMainWindowSoundSlider.Value = 100;
+                SliderMainWindowSoundSlider.Value = 10;
+                MediaElementMainWindow.Volume = 1;
             }
-
         }
 
         private void SliderMainWindowSoundSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
+            if (_volumeOnOffToggle == null) return;
             if (Math.Abs(SliderMainWindowSoundSlider.Value) < .0001)
             {
-                _volumeOnOffImageToggle.forceOff();
+                _volumeOnOffToggle.forceOn();
             }
             else
             {
-                _volumeOnOffImageToggle.forceOn();
+                _volumeOnOffToggle.forceOff();
             }
-
+            //TODO: do function logic
         }
 
-        private readonly ImageToggle _pausePlayImageToggle;
-        private readonly ImageToggle _volumeOnOffImageToggle;
+        private void openQuickSearchWindow(object sender, RoutedEventArgs e)
+        {
+            _quickSearchWindow = new QuickSearchWindow(this);
+            _quickSearchWindow.Show();
+        }
+
+        private void openAdvancedSearchWindow(object sender, RoutedEventArgs e)
+        {
+            _advancedSearchWindow = new AdvancedSearchWindow(this);
+            _advancedSearchWindow.Show();
+        }
+
+        private readonly IToggle _pausePlayToggle;
+        private readonly IToggle _volumeOnOffToggle;
+        private QuickSearchWindow _quickSearchWindow;
+        private AdvancedSearchWindow _advancedSearchWindow;
 
     }
 }
