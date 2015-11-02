@@ -1,0 +1,17 @@
+﻿<Window x:Name="AdvancedSearchWindow1" x:Class="FinalProjMediaPlayer.AdvancedSearchWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FinalProjMediaPlayer"
+        mc:Ignorable="d"
+        Title="AdvancedSearch" Height="300" Width="300" WindowStyle="ToolWindow" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" ShowInTaskbar="False" KeyDown="AdvancedSearchWindow1_KeyDown">
+    <Grid x:Name="GridAdvancedSearchWindow">
+        <Button x:Name="ButtonAdvancedSearchWindowSearch" Content="_Search" HorizontalAlignment="Left" Margin="209,245,0,0" VerticalAlignment="Top" Width="75"/>
+        <TextBox x:Name="TextBoxAdvancedSearchWindowArtist" HorizontalAlignment="Left" Height="23" Margin="53,10,0,0" TextWrapping="Wrap" Text="Enter artist to search for" VerticalAlignment="Top" Width="231" ToolTip="Enter artist to search for" TabIndex="0"/>
+        <Label x:Name="LabelAdvancedSearchWindowArtist" Content="Artist" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="LabelAdvancedSearchWindowSong" Content="Song" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="TextBoxAdvancedSearchWindowSong" HorizontalAlignment="Left" Height="23" Margin="53,44,0,0" TextWrapping="Wrap" Text="Enter song to search for" VerticalAlignment="Top" Width="231" ToolTip="Enter song to search for" TabIndex="1"/>
+
+    </Grid>
+</Window>
