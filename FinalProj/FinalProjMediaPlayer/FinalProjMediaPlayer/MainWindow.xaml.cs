@@ -28,8 +28,8 @@ namespace FinalProjMediaPlayer
                                                ref ImageMainWindowPausePlayButton);
             _volumeOnOffToggle = new ImageToggle(new BitmapImage(new Uri("pack://application:,,,/Icons/SoundfileNoSound_461.png")), 
                                                  ref ImageMainWindowVolumePic);
-            SliderMainWindowSoundSlider.Value = 10;
-            MediaElementMainWindow.Volume = 1;
+            SliderMainWindowSoundSlider.Value = Globals.MaxSliderValue;
+            MediaElementMainWindow.Volume = Globals.MaxVolume;
         }
 
         public void closeQuickSearchWindow()
@@ -72,15 +72,15 @@ namespace FinalProjMediaPlayer
             }
             else
             {
-                SliderMainWindowSoundSlider.Value = 10;
-                MediaElementMainWindow.Volume = 1;
+                SliderMainWindowSoundSlider.Value = Globals.MaxSliderValue;
+                MediaElementMainWindow.Volume = Globals.MaxVolume;
             }
         }
 
         private void SliderMainWindowSoundSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (_volumeOnOffToggle == null) return;
-            if (Math.Abs(SliderMainWindowSoundSlider.Value) < .0001)
+            if (Math.Abs(SliderMainWindowSoundSlider.Value) < Globals.DoubleTolerance)
             {
                 _volumeOnOffToggle.forceOn();
             }

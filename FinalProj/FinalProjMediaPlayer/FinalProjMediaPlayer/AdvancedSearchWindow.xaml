@@ -12,6 +12,8 @@
         <Label x:Name="LabelAdvancedSearchWindowArtist" Content="Artist" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <Label x:Name="LabelAdvancedSearchWindowSong" Content="Song" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="TextBoxAdvancedSearchWindowSong" HorizontalAlignment="Left" Height="23" Margin="53,44,0,0" TextWrapping="Wrap" Text="Enter song to search for" VerticalAlignment="Top" Width="231" ToolTip="Enter song to search for" TabIndex="1"/>
+        <Label x:Name="LabelAdvancedSearchWindowGenre" Content="Genre" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="TextBoxAdvancedSearchWindowGenre" HorizontalAlignment="Left" Height="23" Margin="57,72,0,0" TextWrapping="Wrap" Text="Enter genre to search for" VerticalAlignment="Top" Width="227"/>
 
     </Grid>
 </Window>
