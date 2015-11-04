@@ -8,10 +8,10 @@
         Title="AdvancedSearch" Height="300" Width="300" WindowStyle="ToolWindow" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" ShowInTaskbar="False" KeyDown="AdvancedSearchWindow1_KeyDown">
     <Grid x:Name="GridAdvancedSearchWindow">
         <Button x:Name="ButtonAdvancedSearchWindowSearch" Content="_Search" HorizontalAlignment="Left" Margin="209,245,0,0" VerticalAlignment="Top" Width="75"/>
-        <TextBox x:Name="TextBoxAdvancedSearchWindowArtist" HorizontalAlignment="Left" Height="23" Margin="53,10,0,0" TextWrapping="Wrap" Text="Enter artist to search for" VerticalAlignment="Top" Width="231" ToolTip="Enter artist to search for" TabIndex="0"/>
+        <TextBox x:Name="TextBoxAdvancedSearchWindowArtist" HorizontalAlignment="Left" Height="23" Margin="57,10,0,0" TextWrapping="Wrap" Text="Enter artist to search for" VerticalAlignment="Top" Width="227" ToolTip="Enter artist to search for" TabIndex="0"/>
         <Label x:Name="LabelAdvancedSearchWindowArtist" Content="Artist" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <Label x:Name="LabelAdvancedSearchWindowSong" Content="Song" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="TextBoxAdvancedSearchWindowSong" HorizontalAlignment="Left" Height="23" Margin="53,44,0,0" TextWrapping="Wrap" Text="Enter song to search for" VerticalAlignment="Top" Width="231" ToolTip="Enter song to search for" TabIndex="1"/>
+        <TextBox x:Name="TextBoxAdvancedSearchWindowSong" HorizontalAlignment="Left" Height="23" Margin="57,44,0,0" TextWrapping="Wrap" Text="Enter song to search for" VerticalAlignment="Top" Width="227" ToolTip="Enter song to search for" TabIndex="1"/>
         <Label x:Name="LabelAdvancedSearchWindowGenre" Content="Genre" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="TextBoxAdvancedSearchWindowGenre" HorizontalAlignment="Left" Height="23" Margin="57,72,0,0" TextWrapping="Wrap" Text="Enter genre to search for" VerticalAlignment="Top" Width="227"/>
 

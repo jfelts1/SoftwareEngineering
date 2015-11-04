@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -13,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using FinalProjMediaPlayer.Interfaces;
 
 namespace FinalProjMediaPlayer
 {
@@ -30,6 +32,10 @@ namespace FinalProjMediaPlayer
                                                  ref ImageMainWindowVolumePic);
             SliderMainWindowSoundSlider.Value = Globals.MaxSliderValue;
             MediaElementMainWindow.Volume = Globals.MaxVolume;
+            //fill this list
+            IList<IMediaEntry> mediaEntries = new List<IMediaEntry>();
+
+            _databaseHandler = new DatabaseHandler(mediaEntries);
         }
 
         public void closeQuickSearchWindow()
@@ -103,10 +109,16 @@ namespace FinalProjMediaPlayer
             _advancedSearchWindow.Show();
         }
 
+        private void MainWindow1_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            _databaseHandler.shutdownDatabaseConnection();
+        }
+
         private readonly IToggle _pausePlayToggle;
         private readonly IToggle _volumeOnOffToggle;
         private QuickSearchWindow _quickSearchWindow;
         private AdvancedSearchWindow _advancedSearchWindow;
+        private DatabaseHandler _databaseHandler;
 
     }
 }
