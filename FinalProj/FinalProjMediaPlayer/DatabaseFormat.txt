@@ -1,0 +1,7 @@
+Database
+	MediaData
+	2 Tables
+		Music
+			Title Artist Genre Length
+		Video
+			Title Publisher Genre Length
