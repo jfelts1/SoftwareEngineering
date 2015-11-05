@@ -8,6 +8,6 @@ namespace FinalProjMediaPlayer.Interfaces
         string Title { get; }
         long Length { get; }
         string Creator { get; }
-        string FilePath { get; }
+        string FilePath { get;}
     }
 }

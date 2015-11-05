@@ -45,6 +45,7 @@ namespace FinalProjMediaPlayer
                 {
                     throw new DataException("not a Music or Video entry");
                 }
+                insertCom.ExecuteNonQuery();
             }
         }
 
@@ -62,7 +63,7 @@ namespace FinalProjMediaPlayer
 
         public void shutdownDatabaseConnection()
         {
-            _dbConnection.Close();
+            _dbConnection?.Close();
         }
 
         private readonly IList<IMediaEntry> _mediaEntries;
