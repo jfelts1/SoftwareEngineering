@@ -300,3 +300,6 @@ local.properties
 
 # TeXlipse plugin
 .texlipse
+
+#SQLite databases
+.sqlite

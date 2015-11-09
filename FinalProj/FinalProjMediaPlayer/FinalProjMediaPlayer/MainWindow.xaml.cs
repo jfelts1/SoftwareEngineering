@@ -34,6 +34,7 @@ namespace FinalProjMediaPlayer
             MediaElementMainWindow.Volume = Globals.MaxVolume;
             //TODO: fill this list
             IList<IMediaEntry> mediaEntries = new List<IMediaEntry>();
+            //dummy data can be removed when real data is available
             mediaEntries.Add(new MusicEntry("qwerty","aaa",1000,"zxcvbnm","tehawetk/asdf.txt"));
 
             _databaseHandler = new DatabaseHandler(mediaEntries);
@@ -41,12 +42,12 @@ namespace FinalProjMediaPlayer
 
         public void closeQuickSearchWindow()
         {
-            _quickSearchWindow?.Close();
+            _quickSearchWindow.Close();
         }
 
         public void closeAdvancedSearchWindow()
         {
-            _advancedSearchWindow?.Close();
+            _advancedSearchWindow.Close();
         }
 
         private void exitProgram(object sender, RoutedEventArgs e)

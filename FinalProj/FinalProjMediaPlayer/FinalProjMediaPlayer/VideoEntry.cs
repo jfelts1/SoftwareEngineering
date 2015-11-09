@@ -14,6 +14,7 @@ namespace FinalProjMediaPlayer
             Creator = publisher;
             FilePath = filePath;
         }
+
         public string Genre { get; }
         public string Title { get; }
         public long Length { get; }

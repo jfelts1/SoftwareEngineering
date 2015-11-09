@@ -25,7 +25,8 @@ namespace FinalProjMediaPlayer
             {
                 if (entry is MusicEntry)
                 {
-                    insertCom.CommandText = "insert into Music (Title, Artist, Genre, Length, FilePath) values (?,?,?,?,?)";
+                    insertCom.CommandText = "insert or ignore into Music (Title, Artist, Genre, Length, FilePath) " +
+                                            "values (?,?,?,?,?)";
                     insertCom.Parameters.Add("@Title", DbType.String).Value = entry.Title;
                     insertCom.Parameters.Add("@Artist", DbType.String).Value = entry.Creator;
                     insertCom.Parameters.Add("@Genre", DbType.String).Value = entry.Genre;
@@ -34,7 +35,8 @@ namespace FinalProjMediaPlayer
                 }
                 else if(entry is VideoEntry)
                 {
-                    insertCom.CommandText = "insert into Video (Title, Publisher, Genre, Length, FilePath) values (?,?,?,?,?)";
+                    insertCom.CommandText = "insert or ignore into Video (Title, Publisher, Genre, Length, FilePath) " +
+                                            "values (?,?,?,?,?)";
                     insertCom.Parameters.Add("@Title", DbType.String).Value = entry.Title;
                     insertCom.Parameters.Add("@Publisher", DbType.String).Value = entry.Creator;
                     insertCom.Parameters.Add("@Genre", DbType.String).Value = entry.Genre;
@@ -54,16 +56,18 @@ namespace FinalProjMediaPlayer
             // ReSharper disable once UseObjectOrCollectionInitializer
             SQLiteCommand checkCom = new SQLiteCommand(_dbConnection);
             checkCom.CommandText =
-                "create table if not exists Music (Title varchar(300), Artist varchar(300), Genre varchar(20), Length int, FilePath varchar(300))";
+                "create table if not exists " +
+                "Music (Title varchar(300), Artist varchar(300), Genre varchar(20), Length int, FilePath varchar(300) PRIMARY KEY)";
             checkCom.ExecuteNonQuery();
             checkCom.CommandText =
-                "create table if not exists Video (Title varchar(300), Publisher varchar(300), Genre varchar(20), Length int, FilePath varchar(300))";
+                "create table if not exists " +
+                "Video (Title varchar(300), Publisher varchar(300), Genre varchar(20), Length int, FilePath varchar(300) PRIMARY KEY)";
             checkCom.ExecuteNonQuery();
         }
 
         public void shutdownDatabaseConnection()
         {
-            _dbConnection?.Close();
+            _dbConnection.Close();
         }
 
         private readonly IList<IMediaEntry> _mediaEntries;
