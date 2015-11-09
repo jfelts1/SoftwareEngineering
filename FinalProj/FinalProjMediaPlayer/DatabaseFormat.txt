@@ -2,6 +2,12 @@ Database
 	MediaData
 	2 Tables
 		Music
+<<<<<<< HEAD
 			Title Artist Genre Length
 		Video
 			Title Publisher Genre Length
+=======
+			Title Artist Genre Length FilePath
+		Video
+			Title Publisher Genre Length FilePath
+>>>>>>> d35d77eb8de5bea202d379517d3be40a496848da

@@ -8,7 +8,7 @@
         Title="QuickSearch" Height="100" Width="300" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" ShowInTaskbar="False" WindowStyle="ToolWindow" KeyDown="QuickSearchWindow1_KeyDown">
     <Grid x:Name="GridQuickSearchWindow">
         <Button x:Name="ButtonQuickSearchWindowSearch" Content="_Search" HorizontalAlignment="Left" Margin="207,38,0,0" VerticalAlignment="Top" Width="75" TabIndex="1"/>
-        <TextBox x:Name="TextBoxQuickSearchWindowSearchTextBox" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" Text="Enter name of a song to search for" VerticalAlignment="Top" Width="272" TabIndex="0"/>
+        <TextBox x:Name="TextBoxQuickSearchWindowSearchTextBox" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" Text="Enter name of a artist to search for" VerticalAlignment="Top" Width="272" TabIndex="0"/>
 
     </Grid>
 </Window>

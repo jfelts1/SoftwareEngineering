@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -13,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using FinalProjMediaPlayer.Interfaces;
 
 namespace FinalProjMediaPlayer
 {
@@ -28,18 +30,23 @@ namespace FinalProjMediaPlayer
                                                ref ImageMainWindowPausePlayButton);
             _volumeOnOffToggle = new ImageToggle(new BitmapImage(new Uri("pack://application:,,,/Icons/SoundfileNoSound_461.png")), 
                                                  ref ImageMainWindowVolumePic);
-            SliderMainWindowSoundSlider.Value = 10;
-            MediaElementMainWindow.Volume = 1;
+            SliderMainWindowSoundSlider.Value = Globals.MaxSliderValue;
+            MediaElementMainWindow.Volume = Globals.MaxVolume;
+            //TODO: fill this list
+            IList<IMediaEntry> mediaEntries = new List<IMediaEntry>();
+            mediaEntries.Add(new MusicEntry("qwerty","aaa",1000,"zxcvbnm","tehawetk/asdf.txt"));
+
+            _databaseHandler = new DatabaseHandler(mediaEntries);
         }
 
         public void closeQuickSearchWindow()
         {
-            _quickSearchWindow.Close();
+            _quickSearchWindow?.Close();
         }
 
         public void closeAdvancedSearchWindow()
         {
-            _advancedSearchWindow.Close();
+            _advancedSearchWindow?.Close();
         }
 
         private void exitProgram(object sender, RoutedEventArgs e)
@@ -72,15 +79,15 @@ namespace FinalProjMediaPlayer
             }
             else
             {
-                SliderMainWindowSoundSlider.Value = 10;
-                MediaElementMainWindow.Volume = 1;
+                SliderMainWindowSoundSlider.Value = Globals.MaxSliderValue;
+                MediaElementMainWindow.Volume = Globals.MaxVolume;
             }
         }
 
         private void SliderMainWindowSoundSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (_volumeOnOffToggle == null) return;
-            if (Math.Abs(SliderMainWindowSoundSlider.Value) < .0001)
+            if (Math.Abs(SliderMainWindowSoundSlider.Value) < Globals.DoubleTolerance)
             {
                 _volumeOnOffToggle.forceOn();
             }
@@ -103,10 +110,16 @@ namespace FinalProjMediaPlayer
             _advancedSearchWindow.Show();
         }
 
+        private void MainWindow1_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            _databaseHandler.shutdownDatabaseConnection();
+        }
+
         private readonly IToggle _pausePlayToggle;
         private readonly IToggle _volumeOnOffToggle;
         private QuickSearchWindow _quickSearchWindow;
         private AdvancedSearchWindow _advancedSearchWindow;
+        private DatabaseHandler _databaseHandler;
 
     }
 }
