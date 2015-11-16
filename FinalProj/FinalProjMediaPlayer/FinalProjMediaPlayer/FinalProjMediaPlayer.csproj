@@ -90,6 +90,7 @@
     <Compile Include="Globals.cs" />
     <Compile Include="Interfaces\IMediaEntry.cs" />
     <Compile Include="MusicEntry.cs" />
+    <Compile Include="MusicID3Tag.cs" />
     <Compile Include="QuickSearchWindow.xaml.cs">
       <DependentUpon>QuickSearchWindow.xaml</DependentUpon>
     </Compile>
