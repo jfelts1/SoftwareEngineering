@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -54,10 +55,98 @@ namespace FinalProjMediaPlayer
             MediaElementMainWindow.Volume = Globals.MaxVolume;
             //TODO: fill this list
             IList<IMediaEntry> mediaEntries = new List<IMediaEntry>();
-            //dummy data can be removed when real data is available
-            mediaEntries.Add(new MusicEntry("qwerty","aaa",1000,"zxcvbnm","tehawetk/asdf.txt"));
+            mediaEntries = searchForFilesAndGetInfo();
 
             _databaseHandler = new DatabaseHandler(mediaEntries);
+        }
+
+        private IList<IMediaEntry> searchForFilesAndGetInfo()
+        {
+            //Jess' code starts here
+            string[] mp3Files = System.IO.Directory.GetFiles(System.IO.Directory.GetCurrentDirectory(), "*.mp3");
+            string[] aviFiles = System.IO.Directory.GetFiles(System.IO.Directory.GetCurrentDirectory(), "*.avi");
+            Console.WriteLine("Current Working Directory: " + System.IO.Directory.GetCurrentDirectory());
+            ArrayList files = new ArrayList(mp3Files.Length + aviFiles.Length);
+            if (mp3Files.Length == 0) Console.WriteLine("Error: No_MP3_Doge"); // (╯°□°）╯︵ ┻━┻
+            else
+            {
+                foreach (string t in mp3Files)
+                {
+                    Console.WriteLine(t);
+                    files.Add(t);
+                }
+            }
+            if (aviFiles.Length == 0) Console.WriteLine("Error: No_AVI_Doge"); // (╯°□°）╯︵ ┻━┻
+            else
+            {
+                foreach (string t in aviFiles)
+                {
+                    Console.WriteLine(t);
+                    files.Add(t);
+                }
+            }
+
+            Console.WriteLine("ArrayList: ");
+            foreach (object curLine in files)
+            {
+                Console.WriteLine(curLine);
+            }
+            Console.ReadLine();
+
+            //Jess' code ends here
+
+            //Chelsea's code begins here
+            string filePath = "";
+            IList<IMediaEntry> mediaEntries = new List<IMediaEntry>();
+
+            foreach (object filePathObject in files)
+            {
+                filePath = filePathObject.ToString();
+
+                using (FileStream fs = File.OpenRead(filePath))
+                {
+                    if (fs.Length >= 128)
+                    {
+                        MusicID3Tag tag = new MusicID3Tag();
+                        fs.Seek(-128, SeekOrigin.End);
+                        fs.Read(tag.TAGID, 0, tag.TAGID.Length);
+                        fs.Read(tag.Title, 0, tag.Title.Length);
+                        fs.Read(tag.Artist, 0, tag.Artist.Length);
+                        fs.Read(tag.Album, 0, tag.Album.Length);
+                        fs.Read(tag.Year, 0, tag.Year.Length);
+                        fs.Read(tag.Comment, 0, tag.Comment.Length);
+                        fs.Read(tag.Genre, 0, tag.Genre.Length);
+                        string theTAGID = Encoding.Default.GetString(tag.TAGID);
+
+                        if (theTAGID.Equals("TAG"))
+                        {
+                            string Title = Encoding.Default.GetString(tag.Title);
+                            string Artist = Encoding.Default.GetString(tag.Artist);
+                            string Album = Encoding.Default.GetString(tag.Album);
+                            string Year = Encoding.Default.GetString(tag.Year);
+                            string Comment = Encoding.Default.GetString(tag.Comment);
+                            string Genre = Encoding.Default.GetString(tag.Genre);
+                            //long Length = Encoding.Default.GetString(tag.)
+
+                            Console.WriteLine();
+                            Console.WriteLine("Title: " + Title);
+                            Console.WriteLine("Artist: " + Artist);
+                            Console.WriteLine("Album: " + Album);
+                            Console.WriteLine("Year: " + Year);
+                            Console.WriteLine("Comment: " + Comment);
+                            Console.WriteLine("Genre: " + Genre);
+                            Console.WriteLine();
+
+                            // MusicEntry(string genre, string title, long length, string artist, string filePath)
+                            MusicEntry m = new MusicEntry(Genre, Title, 0, Artist, filePath);
+                            mediaEntries.Add(m);
+                        }
+                    }
+                }
+            }
+
+
+            return mediaEntries;
         }
 
         public void closeQuickSearchWindow()
