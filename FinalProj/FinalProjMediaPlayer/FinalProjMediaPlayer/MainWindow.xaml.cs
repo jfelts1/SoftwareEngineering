@@ -53,9 +53,8 @@ namespace FinalProjMediaPlayer
                                                  ref ImageMainWindowVolumePic);
             SliderMainWindowSoundSlider.Value = Globals.MaxSliderValue;
             MediaElementMainWindow.Volume = Globals.MaxVolume;
-            //TODO: fill this list
-            IList<IMediaEntry> mediaEntries = new List<IMediaEntry>();
-            mediaEntries = searchForFilesAndGetInfo();
+            
+            IList<IMediaEntry> mediaEntries = searchForFilesAndGetInfo();
 
             _databaseHandler = new DatabaseHandler(mediaEntries);
         }
@@ -99,52 +98,57 @@ namespace FinalProjMediaPlayer
             string filePath = "";
             IList<IMediaEntry> mediaEntries = new List<IMediaEntry>();
 
-            foreach (object filePathObject in files)
+            if(files.Count == 0) Console.WriteLine("Error: No_Files");
+            else
             {
-                filePath = filePathObject.ToString();
-
-                using (FileStream fs = File.OpenRead(filePath))
+                foreach (object filePathObject in files)
                 {
-                    if (fs.Length >= 128)
+                    filePath = filePathObject.ToString();
+
+                    using (FileStream fs = File.OpenRead(filePath))
                     {
-                        MusicID3Tag tag = new MusicID3Tag();
-                        fs.Seek(-128, SeekOrigin.End);
-                        fs.Read(tag.TAGID, 0, tag.TAGID.Length);
-                        fs.Read(tag.Title, 0, tag.Title.Length);
-                        fs.Read(tag.Artist, 0, tag.Artist.Length);
-                        fs.Read(tag.Album, 0, tag.Album.Length);
-                        fs.Read(tag.Year, 0, tag.Year.Length);
-                        fs.Read(tag.Comment, 0, tag.Comment.Length);
-                        fs.Read(tag.Genre, 0, tag.Genre.Length);
-                        string theTAGID = Encoding.Default.GetString(tag.TAGID);
-
-                        if (theTAGID.Equals("TAG"))
+                        //Meaning that tags have been added to the file, ie artist, genre, etc
+                        if (fs.Length >= 128)
                         {
-                            string Title = Encoding.Default.GetString(tag.Title);
-                            string Artist = Encoding.Default.GetString(tag.Artist);
-                            string Album = Encoding.Default.GetString(tag.Album);
-                            string Year = Encoding.Default.GetString(tag.Year);
-                            string Comment = Encoding.Default.GetString(tag.Comment);
-                            string Genre = Encoding.Default.GetString(tag.Genre);
-                            //long Length = Encoding.Default.GetString(tag.)
+                            MusicID3Tag tag = new MusicID3Tag();
+                            fs.Seek(-128, SeekOrigin.End);
+                            fs.Read(tag.TAGID, 0, tag.TAGID.Length);
+                            fs.Read(tag.Title, 0, tag.Title.Length);
+                            fs.Read(tag.Artist, 0, tag.Artist.Length);
+                            fs.Read(tag.Album, 0, tag.Album.Length);
+                            fs.Read(tag.Year, 0, tag.Year.Length);
+                            fs.Read(tag.Comment, 0, tag.Comment.Length);
+                            fs.Read(tag.Genre, 0, tag.Genre.Length);
+                            string theTAGID = Encoding.Default.GetString(tag.TAGID);
 
-                            Console.WriteLine();
-                            Console.WriteLine("Title: " + Title);
-                            Console.WriteLine("Artist: " + Artist);
-                            Console.WriteLine("Album: " + Album);
-                            Console.WriteLine("Year: " + Year);
-                            Console.WriteLine("Comment: " + Comment);
-                            Console.WriteLine("Genre: " + Genre);
-                            Console.WriteLine();
+                            if (theTAGID.Equals("TAG"))
+                            {
+                                string mediaTitle = Encoding.Default.GetString(tag.Title);
+                                string mediaArtist = Encoding.Default.GetString(tag.Artist);
+                                string mediaAlbum = Encoding.Default.GetString(tag.Album);
+                                string mediaYear = Encoding.Default.GetString(tag.Year);
+                                string mediaComment = Encoding.Default.GetString(tag.Comment);
+                                string mediaGenre = Encoding.Default.GetString(tag.Genre);
+                                //long Length = Encoding.Default.GetString(tag.)
 
-                            // MusicEntry(string genre, string title, long length, string artist, string filePath)
-                            MusicEntry m = new MusicEntry(Genre, Title, 0, Artist, filePath);
-                            mediaEntries.Add(m);
+                                Console.WriteLine();
+                                Console.WriteLine("Title: " + mediaTitle);
+                                Console.WriteLine("Artist: " + mediaArtist);
+                                Console.WriteLine("Album: " + mediaAlbum);
+                                Console.WriteLine("Year: " + mediaYear);
+                                Console.WriteLine("Comment: " + mediaComment);
+                                Console.WriteLine("Genre: " + mediaGenre);
+                                Console.WriteLine();
+
+                                // MusicEntry(string genre, string title, long length, string artist, string filePath)
+                                MusicEntry m = new MusicEntry(mediaGenre, mediaTitle, 0, mediaArtist, filePath);
+                                mediaEntries.Add(m);
+                            }
                         }
                     }
                 }
-            }
 
+            }
 
             return mediaEntries;
         }
