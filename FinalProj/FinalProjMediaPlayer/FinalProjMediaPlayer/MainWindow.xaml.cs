@@ -48,7 +48,7 @@ namespace FinalProjMediaPlayer
                         //MessageBox.Show("Pause");
                     }
                 });
-            _volumeOnOffToggle = new ImageToggle(new BitmapImage(new Uri("pack://application:,,,/Icons/SoundfileNoSound_461.png")), 
+            _volumeOnOffToggle = new ImageToggle<double>(new BitmapImage(new Uri("pack://application:,,,/Icons/SoundfileNoSound_461.png")), 
                                                  ref ImageMainWindowVolumePic);
             SliderMainWindowSoundSlider.Value = Globals.MaxSliderValue;
             MediaElementMainWindow.Volume = Globals.MaxVolume;
@@ -110,22 +110,22 @@ namespace FinalProjMediaPlayer
             if (_volumeOnOffToggle == null) return;
 
             double tmp = e.NewValue/Globals.MaxSliderValue;
-            if (tmp <= 1 && tmp >= 0)
+            /*if (tmp <= 1 && tmp >= 0)
             {
                 MediaElementMainWindow.Volume = tmp;
             }
             else
             {
                 MessageBox.Show("Invalid Volume: "+tmp);
-            }
+            }*/
 
             if (Math.Abs(SliderMainWindowSoundSlider.Value) < Globals.DoubleTolerance)
             {
-                _volumeOnOffToggle.forceOn();
+                _volumeOnOffToggle.forceOn(0.0);
             }
             else
             {
-                _volumeOnOffToggle.forceOff();
+                _volumeOnOffToggle.forceOff(tmp);
             }
 
         }
@@ -148,7 +148,7 @@ namespace FinalProjMediaPlayer
         }
 
         private readonly IToggle _pausePlayToggle;
-        private readonly IToggle _volumeOnOffToggle;
+        private readonly IToggle<double> _volumeOnOffToggle;
         private QuickSearchWindow _quickSearchWindow;
         private AdvancedSearchWindow _advancedSearchWindow;
         private DatabaseHandler _databaseHandler;

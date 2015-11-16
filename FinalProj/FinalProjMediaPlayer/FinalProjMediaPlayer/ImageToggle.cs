@@ -35,7 +35,45 @@ namespace FinalProjMediaPlayer
         {
             Toggled = true;
             _displayedImage.Source = _img1;
-            return Toggled; 
+            return Toggled;
+        }
+
+        private readonly Image _displayedImage;
+        private readonly ImageSource _img1;
+        private readonly ImageSource _img2;
+        public bool Toggled { get; private set; }
+    }
+
+    public class ImageToggle<T> : IToggle<T>
+    {
+        /// <summary>
+        /// Defaults to the off state and the image from displayedImage
+        /// </summary>
+        public ImageToggle(ImageSource otherImage, ref Image displayedImage)
+        {
+            _img1 = otherImage;
+            _img2 = displayedImage.Source;
+            _displayedImage = displayedImage;
+            Toggled = false;
+        }
+
+        public bool toggle()
+        {
+            return Toggled ? forceOff() : forceOn();
+        }
+
+        public virtual bool forceOff(params T[] par)
+        {
+            Toggled = false;
+            _displayedImage.Source = _img2;
+            return Toggled;
+        }
+
+        public virtual bool forceOn(params T[] par)
+        {
+            Toggled = true;
+            _displayedImage.Source = _img1;
+            return Toggled;
         }
 
         private readonly Image _displayedImage;
