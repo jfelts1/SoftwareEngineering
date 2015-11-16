@@ -86,6 +86,7 @@
     </Compile>
     <Compile Include="DatabaseInserter.cs" />
     <Compile Include="DatabaseSearcher.cs" />
+    <Compile Include="FunctionImageToggle.cs" />
     <Compile Include="Globals.cs" />
     <Compile Include="Interfaces\IMediaEntry.cs" />
     <Compile Include="MusicEntry.cs" />
@@ -165,6 +166,7 @@
   <ItemGroup>
     <Resource Include="Icons\SoundfileNoSound_461.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
