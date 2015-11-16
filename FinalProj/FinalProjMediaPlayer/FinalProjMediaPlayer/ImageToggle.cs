@@ -2,15 +2,18 @@
 
 using System.Windows.Controls;
 using System.Windows.Media;
+using FinalProjMediaPlayer.Interfaces;
 
 namespace FinalProjMediaPlayer
 {
     public class ImageToggle: IToggle
     {
-        //the toggle is initalized in the off state
-        public ImageToggle(ImageSource i1, ref Image displayedImage)
+        /// <summary>
+        /// Defaults to the off state and the image from displayedImage
+        /// </summary>
+        public ImageToggle(ImageSource otherImage, ref Image displayedImage)
         {
-            _img1 = i1;
+            _img1 = otherImage;
             _img2 = displayedImage.Source;
             _displayedImage = displayedImage;
             Toggled = false;
@@ -21,14 +24,14 @@ namespace FinalProjMediaPlayer
             return Toggled ? forceOff() : forceOn();
         }
 
-        public bool forceOff()
+        public virtual bool forceOff()
         {
             Toggled = false;
             _displayedImage.Source = _img2;
             return Toggled;
         }
 
-        public bool forceOn()
+        public virtual bool forceOn()
         {
             Toggled = true;
             _displayedImage.Source = _img1;

@@ -1,6 +1,6 @@
 ﻿//     James Felts 2015
 
-namespace FinalProjMediaPlayer
+namespace FinalProjMediaPlayer.Interfaces
 {
     //interface for a toggle
     public interface IToggle

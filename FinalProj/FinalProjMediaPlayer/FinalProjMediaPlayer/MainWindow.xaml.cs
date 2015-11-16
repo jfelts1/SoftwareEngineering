@@ -26,8 +26,28 @@ namespace FinalProjMediaPlayer
         public MainWindow()
         {
             InitializeComponent();
-            _pausePlayToggle = new ImageToggle(new BitmapImage(new Uri("pack://application:,,,/Icons/Symbols_Play_16xLG.png")),
-                                               ref ImageMainWindowPausePlayButton);
+            _pausePlayToggle = new FunctionImageToggle(new BitmapImage(new Uri("pack://application:,,,/Icons/Symbols_Play_16xLG.png")),
+                                               ref ImageMainWindowPausePlayButton,
+                () =>
+                {
+                    if (MediaElementMainWindow.IsLoaded &&
+                        MediaElementMainWindow.LoadedBehavior == MediaState.Manual &&
+                        MediaElementMainWindow.Clock == null)
+                    {
+                        MediaElementMainWindow.Play();
+                        //MessageBox.Show("Play");
+                    }
+                },
+                () =>
+                {
+                    if (MediaElementMainWindow.IsLoaded &&
+                        MediaElementMainWindow.LoadedBehavior == MediaState.Manual &&
+                        MediaElementMainWindow.Clock == null)
+                    {
+                        MediaElementMainWindow.Pause();
+                        //MessageBox.Show("Pause");
+                    }
+                });
             _volumeOnOffToggle = new ImageToggle(new BitmapImage(new Uri("pack://application:,,,/Icons/SoundfileNoSound_461.png")), 
                                                  ref ImageMainWindowVolumePic);
             SliderMainWindowSoundSlider.Value = Globals.MaxSliderValue;
@@ -57,8 +77,7 @@ namespace FinalProjMediaPlayer
 
         private void pausePlayToggle(object sender, MouseButtonEventArgs e)
         {
-            bool t = _pausePlayToggle.toggle();
-            //TODO: do function logic
+            _pausePlayToggle.toggle();
         }
 
         private void openAboutWindow(object sender, RoutedEventArgs e)
@@ -73,6 +92,7 @@ namespace FinalProjMediaPlayer
         private void volumeOnOffToggle(object sender, MouseButtonEventArgs e)
         {
             bool t = _volumeOnOffToggle.toggle();
+            
             if (t)
             {
                 SliderMainWindowSoundSlider.Value = 0;
@@ -88,6 +108,17 @@ namespace FinalProjMediaPlayer
         private void SliderMainWindowSoundSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (_volumeOnOffToggle == null) return;
+
+            double tmp = e.NewValue/Globals.MaxSliderValue;
+            if (tmp <= 1 && tmp >= 0)
+            {
+                MediaElementMainWindow.Volume = tmp;
+            }
+            else
+            {
+                MessageBox.Show("Invalid Volume: "+tmp);
+            }
+
             if (Math.Abs(SliderMainWindowSoundSlider.Value) < Globals.DoubleTolerance)
             {
                 _volumeOnOffToggle.forceOn();
@@ -96,7 +127,7 @@ namespace FinalProjMediaPlayer
             {
                 _volumeOnOffToggle.forceOff();
             }
-            //TODO: do function logic
+
         }
 
         private void openQuickSearchWindow(object sender, RoutedEventArgs e)
