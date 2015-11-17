@@ -63,6 +63,15 @@ namespace FinalProjMediaPlayer.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Title: .
         /// </summary>
+        internal static string MainWindow_getMediaInfo_Title__ {
+            get {
+                return ResourceManager.GetString("MainWindow_getMediaInfo_Title__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Title: .
+        /// </summary>
         internal static string MainWindow_searchForFilesAndGetInfo_Title__ {
             get {
                 return ResourceManager.GetString("MainWindow_searchForFilesAndGetInfo_Title__", resourceCulture);

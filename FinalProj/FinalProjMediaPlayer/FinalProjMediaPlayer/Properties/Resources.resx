@@ -117,4 +117,7 @@
   <data name="MainWindow_searchForFilesAndGetInfo_Title__" xml:space="preserve">
     <value>Title: </value>
   </data>
+  <data name="MainWindow_getMediaInfo_Title__" xml:space="preserve">
+    <value>Title: </value>
+  </data>
 </root>
