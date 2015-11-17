@@ -51,7 +51,6 @@ namespace FinalProjMediaPlayer
                 });
             _volumeHandler = new VolumeHandler(ref MediaElementMainWindow,
                    ref SliderMainWindowSoundSlider,ref ImageMainWindowVolumePic);
-            //TODO: fill this list
             IList<IMediaEntry> mediaEntries = searchForFilesAndGetInfo();
 
             _databaseHandler = new DatabaseHandler(mediaEntries);

@@ -13,7 +13,7 @@ namespace FinalProjMediaPlayer
         public VolumeHandler(ref MediaElement mediaElement, ref Slider volumeSlider,ref Image pic)
         {
             _mediaElement = mediaElement;
-            _volumeSliderToggle = new ImageToggle(
+            _volumeImageToggle = new ImageToggle(
                 new BitmapImage(new Uri("pack://application:,,,/Icons/SoundfileNoSound_461.png")),ref pic);
             _lastVolumeValue = Globals.MaxVolume;
             _lastVolumeSliderValue = Globals.MaxSliderValue;
@@ -31,7 +31,7 @@ namespace FinalProjMediaPlayer
             Toggled = false;
             _mediaElement.Volume = 0;
             _volumeSlider.Value = 0;
-            _volumeSliderToggle.forceOn();
+            _volumeImageToggle.forceOn();
             return Toggled;
         }
 
@@ -40,7 +40,7 @@ namespace FinalProjMediaPlayer
             Toggled = true;
             _mediaElement.Volume = _lastVolumeValue;
             _volumeSlider.Value = _lastVolumeSliderValue;
-            _volumeSliderToggle.forceOff();
+            _volumeImageToggle.forceOff();
             return Toggled;
         }
 
@@ -68,7 +68,7 @@ namespace FinalProjMediaPlayer
         public bool Toggled { get; private set; }
 
         private readonly MediaElement _mediaElement;
-        private readonly IToggle _volumeSliderToggle;
+        private readonly IToggle _volumeImageToggle;
         private readonly Slider _volumeSlider; 
         private double _lastVolumeValue;
         private double _lastVolumeSliderValue;
