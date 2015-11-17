@@ -3,7 +3,6 @@
 using System;
 using System.Windows.Controls;
 using System.Windows.Media;
-using FinalProjMediaPlayer.Interfaces;
 
 namespace FinalProjMediaPlayer
 {

@@ -49,13 +49,9 @@ namespace FinalProjMediaPlayer
                         //MessageBox.Show("Pause");
                     }
                 });
-            _volumeOnOffToggle = new ImageToggle<double>(new BitmapImage(new Uri("pack://application:,,,/Icons/SoundfileNoSound_461.png")), 
-                                                 ref ImageMainWindowVolumePic);
-            SliderMainWindowSoundSlider.Value = Globals.MaxSliderValue;
-            MediaElementMainWindow.Volume = Globals.MaxVolume;
-            //TODO: fill this list
-            IList<IMediaEntry> mediaEntries = new List<IMediaEntry>();
-            mediaEntries = searchForFilesAndGetInfo();
+            _volumeHandler = new VolumeHandler(ref MediaElementMainWindow,
+                   ref SliderMainWindowSoundSlider,ref ImageMainWindowVolumePic);
+            IList<IMediaEntry> mediaEntries = searchForFilesAndGetInfo();
 
             _databaseHandler = new DatabaseHandler(mediaEntries);
         }
@@ -180,43 +176,15 @@ namespace FinalProjMediaPlayer
 
         private void volumeOnOffToggle(object sender, MouseButtonEventArgs e)
         {
-            bool t = _volumeOnOffToggle.toggle();
-            
-            if (t)
-            {
-                SliderMainWindowSoundSlider.Value = 0;
-                MediaElementMainWindow.Volume = 0;
-            }
-            else
-            {
-                SliderMainWindowSoundSlider.Value = Globals.MaxSliderValue;
-                MediaElementMainWindow.Volume = Globals.MaxVolume;
-            }
+            _volumeHandler.toggle();
         }
 
         private void SliderMainWindowSoundSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            if (_volumeOnOffToggle == null) return;
-
-            double tmp = e.NewValue/Globals.MaxSliderValue;
-            /*if (tmp <= 1 && tmp >= 0)
+            if (_volumeHandler != null)
             {
-                MediaElementMainWindow.Volume = tmp;
+                _volumeHandler.setVolume(sender,e);
             }
-            else
-            {
-                MessageBox.Show("Invalid Volume: "+tmp);
-            }*/
-
-            if (Math.Abs(SliderMainWindowSoundSlider.Value) < Globals.DoubleTolerance)
-            {
-                _volumeOnOffToggle.forceOn(0.0);
-            }
-            else
-            {
-                _volumeOnOffToggle.forceOff(tmp);
-            }
-
         }
 
         private void openQuickSearchWindow(object sender, RoutedEventArgs e)
@@ -237,10 +205,10 @@ namespace FinalProjMediaPlayer
         }
 
         private readonly IToggle _pausePlayToggle;
-        private readonly IToggle<double> _volumeOnOffToggle;
+        private readonly VolumeHandler _volumeHandler;
         private QuickSearchWindow _quickSearchWindow;
         private AdvancedSearchWindow _advancedSearchWindow;
-        private DatabaseHandler _databaseHandler;
+        private readonly DatabaseHandler _databaseHandler;
 
     }
 }

@@ -49,7 +49,7 @@ namespace FinalProjMediaPlayer
         /// <summary>
         /// Defaults to the off state and the image from displayedImage
         /// </summary>
-        public ImageToggle(ImageSource otherImage, ref Image displayedImage)
+        protected ImageToggle(ImageSource otherImage, ref Image displayedImage)
         {
             _img1 = otherImage;
             _img2 = displayedImage.Source;

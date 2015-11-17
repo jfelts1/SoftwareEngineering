@@ -95,6 +95,7 @@
       <DependentUpon>QuickSearchWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="VideoEntry.cs" />
+    <Compile Include="VolumeHandler.cs" />
     <Page Include="AdvancedSearchWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -135,6 +136,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
