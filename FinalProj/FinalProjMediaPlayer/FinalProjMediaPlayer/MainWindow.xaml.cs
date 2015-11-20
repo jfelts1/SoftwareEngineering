@@ -2,19 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.IO;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using FinalProjMediaPlayer.Interfaces;
 
 namespace FinalProjMediaPlayer
@@ -83,38 +76,38 @@ namespace FinalProjMediaPlayer
                     }
                     MusicID3Tag tag = new MusicID3Tag();
                     fs.Seek(-128, SeekOrigin.End);
-                    fs.Read(tag.TAGID, 0, tag.TAGID.Length);
-                    fs.Read(tag.Title, 0, tag.Title.Length);
-                    fs.Read(tag.Artist, 0, tag.Artist.Length);
-                    fs.Read(tag.Album, 0, tag.Album.Length);
-                    fs.Read(tag.Year, 0, tag.Year.Length);
-                    fs.Read(tag.Comment, 0, tag.Comment.Length);
-                    fs.Read(tag.Genre, 0, tag.Genre.Length);
-                    string theTAGID = Encoding.Default.GetString(tag.TAGID);
+                    fs.Read(tag.tagid, 0, tag.tagid.Length);
+                    fs.Read(tag.title, 0, tag.title.Length);
+                    fs.Read(tag.artist, 0, tag.artist.Length);
+                    fs.Read(tag.album, 0, tag.album.Length);
+                    fs.Read(tag.year, 0, tag.year.Length);
+                    fs.Read(tag.comment, 0, tag.comment.Length);
+                    fs.Read(tag.genre, 0, tag.genre.Length);
+                    string theTagid = Encoding.Default.GetString(tag.tagid);
 
-                    if (!theTAGID.Equals("TAG"))
+                    if (!theTagid.Equals("TAG"))
                     {
                         continue;
                     }
-                    string Title = Encoding.Default.GetString(tag.Title);
-                    string Artist = Encoding.Default.GetString(tag.Artist);
-                    string Album = Encoding.Default.GetString(tag.Album);
-                    string Year = Encoding.Default.GetString(tag.Year);
-                    string Comment = Encoding.Default.GetString(tag.Comment);
-                    string Genre = Encoding.Default.GetString(tag.Genre);
+                    string title = Encoding.Default.GetString(tag.title);
+                    string artist = Encoding.Default.GetString(tag.artist);
+                    string album = Encoding.Default.GetString(tag.album);
+                    string year = Encoding.Default.GetString(tag.year);
+                    string comment = Encoding.Default.GetString(tag.comment);
+                    string genre = Encoding.Default.GetString(tag.genre);
                     //long Length = Encoding.Default.GetString(tag.)
 
                     Console.WriteLine();
-                    Console.WriteLine("Title: " + Title);
-                    Console.WriteLine("Artist: " + Artist);
-                    Console.WriteLine("Album: " + Album);
-                    Console.WriteLine("Year: " + Year);
-                    Console.WriteLine("Comment: " + Comment);
-                    Console.WriteLine("Genre: " + Genre);
+                    Console.WriteLine(@"Title: " + title);
+                    Console.WriteLine(@"Artist: " + artist);
+                    Console.WriteLine(@"Album: " + album);
+                    Console.WriteLine(@"Year: " + year);
+                    Console.WriteLine(@"Comment: " + comment);
+                    Console.WriteLine(@"Genre: " + genre);
                     Console.WriteLine();
 
                     // MusicEntry(string genre, string title, long length, string artist, string filePath)
-                    MusicEntry m = new MusicEntry(Genre, Title, 0, Artist, filePath);
+                    MusicEntry m = new MusicEntry(genre, title, 0, artist, filePath);
                     mediaEntries.Add(m);
                 }
             }
@@ -123,13 +116,13 @@ namespace FinalProjMediaPlayer
 
         private static ArrayList searchForFiles()
         {
-            string[] mp3Files = System.IO.Directory.GetFiles(System.IO.Directory.GetCurrentDirectory(), "*.mp3");
-            string[] aviFiles = System.IO.Directory.GetFiles(System.IO.Directory.GetCurrentDirectory(), "*.avi");
-            Console.WriteLine("Current Working Directory: " + System.IO.Directory.GetCurrentDirectory());
+            string[] mp3Files = Directory.GetFiles(Directory.GetCurrentDirectory(), "*.mp3");
+            string[] aviFiles = Directory.GetFiles(Directory.GetCurrentDirectory(), "*.avi");
+            Console.WriteLine(@"Current Working Directory: " + Directory.GetCurrentDirectory());
             ArrayList files = new ArrayList(mp3Files.Length + aviFiles.Length);
             if (mp3Files.Length == 0)
             {
-                Console.WriteLine("Error: No_MP3_Doge"); // (╯°□°）╯︵ ┻━┻
+                Console.WriteLine(@"Error: No_MP3_Doge"); // (╯°□°）╯︵ ┻━┻
             }
             else
             {
@@ -141,7 +134,7 @@ namespace FinalProjMediaPlayer
             }
             if (aviFiles.Length == 0)
             {
-                Console.WriteLine("Error: No_AVI_Doge"); // (╯°□°）╯︵ ┻━┻
+                Console.WriteLine(@"Error: No_AVI_Doge"); // (╯°□°）╯︵ ┻━┻
             }
             else
             {
@@ -152,7 +145,7 @@ namespace FinalProjMediaPlayer
                 }
             }
 
-            Console.WriteLine("ArrayList: ");
+            Console.WriteLine(@"ArrayList: ");
             foreach (object curLine in files)
             {
                 Console.WriteLine(curLine);
@@ -186,7 +179,7 @@ namespace FinalProjMediaPlayer
             MessageBox.Show("Created by Team-Ctrl-Alt-Delete\n" +
                             "James Felts, Jess Albrecht, Chelsea Davis\n" +
                             ".NET Framework Version: " +
-                            Environment.Version.ToString() +
+                            Environment.Version +
                             (Environment.Is64BitOperatingSystem? " 64 bit" : " 32 bit"));
         }
 

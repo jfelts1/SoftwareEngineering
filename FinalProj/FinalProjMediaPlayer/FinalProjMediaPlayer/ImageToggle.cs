@@ -57,9 +57,9 @@ namespace FinalProjMediaPlayer
             Toggled = false;
         }
 
-        public bool toggle()
+        public virtual bool toggle(T offVar, T onVar)
         {
-            return Toggled ? forceOff() : forceOn();
+            return Toggled ? forceOff(offVar) : forceOn(onVar);
         }
 
         public virtual bool forceOff(params T[] par)

@@ -5,7 +5,7 @@ namespace FinalProjMediaPlayer.Interfaces
     //interface for a toggle
     public interface IToggle<in T>
     {
-        bool toggle();
+        bool toggle(T offVar, T onVar);
         //forces the toggle to the off aka initial state
         bool forceOff(params T[] par);
         //forces the toggle to the on state
