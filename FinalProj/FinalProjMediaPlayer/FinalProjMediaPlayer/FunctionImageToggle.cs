@@ -7,7 +7,7 @@ using System.Windows.Media;
 namespace FinalProjMediaPlayer
 {
     /// <summary>
-    /// Ties two images and two functions together so that when one image is displayed a specific function is run once
+    /// Ties two images and two functions together so that when one image is displayed a specific function is run
     /// </summary>
     public class FunctionImageToggle : ImageToggle
     {
@@ -39,31 +39,31 @@ namespace FinalProjMediaPlayer
         private readonly Action _funcOn;
     }
     /// <summary>
-    /// Ties two images and two functions together so that when one image is displayed a specific function is run once
+    /// Ties two images and two functions together so that when one image is displayed a specific function is run
     /// </summary>
     public class FunctionImageToggle<T> : ImageToggle<T>
     {
         /// <summary>
         /// Defaults to the off state and the image from displayedImage does not call actOff during construction
         /// </summary>
-        public FunctionImageToggle(ImageSource otherImage, ref Image displayedImage , Action<T> actOff, Action<T> actOn) : 
+        public FunctionImageToggle(ImageSource otherImage, ref Image displayedImage , Action<T> actOff, Action<T> actOn) :
             base(otherImage,ref displayedImage)
         {
             _actOff = actOff;
             _actOn = actOn;
         }
 
-        public override bool forceOff(params T[] par)
+        public override bool forceOff(T par)
         {
-            bool t = base.forceOff();
-            _actOff(par[0]);
+            bool t = base.forceOff(par);
+            _actOff(par);
             return t;
         }
 
-        public override bool forceOn(params T[] par)
+        public override bool forceOn(T par)
         {
-            bool t = base.forceOn();
-            _actOn(par[0]);
+            bool t = base.forceOn(par);
+            _actOn(par);
             return t;
         }
 

@@ -3,20 +3,20 @@
 using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media.Imaging;
+using System.Windows.Media;
 using FinalProjMediaPlayer.Interfaces;
 
 namespace FinalProjMediaPlayer
 {
     public class VolumeHandler:IToggle
     {
-        public VolumeHandler(ref MediaElement mediaElement, ref Slider volumeSlider,ref Image pic)
+        public VolumeHandler(ref MediaElement mediaElement, ref Slider volumeSlider, ref Image pic,
+                             ImageSource otherImage)
         {
             _mediaElement = mediaElement;
-            _volumeImageToggle = new ImageToggle(
-                new BitmapImage(new Uri("pack://application:,,,/Icons/SoundfileNoSound_461.png")),ref pic);
-            _lastVolumeValue = Globals.MaxVolume;
-            _lastVolumeSliderValue = Globals.MaxSliderValue;
+            _volumeImageToggle = new ImageToggle(otherImage,ref pic);
+            LastOnVolumeValue = Globals.MaxVolume;
+            LastOnVolumeSliderValue = Globals.MaxSliderValue;
             _volumeSlider = volumeSlider;
             forceOn();
         }
@@ -38,19 +38,40 @@ namespace FinalProjMediaPlayer
         public bool forceOn()
         {
             Toggled = true;
-            _mediaElement.Volume = _lastVolumeValue;
-            _volumeSlider.Value = _lastVolumeSliderValue;
+            _mediaElement.Volume = LastOnVolumeValue;
+            _volumeSlider.Value = LastOnVolumeSliderValue;
             _volumeImageToggle.forceOff();
             return Toggled;
         }
 
+        /// <summary>
+        /// converts a slider Position double to a volume level.
+        /// throws:
+        ///     ArgumentException
+        /// </summary>
+        public static double convertSliderPosToVolLevel(double val)
+        {
+            if (!(val >= 0) || !(val <= Globals.MaxSliderValue))
+            {
+                throw new ArgumentException(
+                    $"Invalid Slider Position: {val}. Values must be greater than or equal to 0 and less than or equal to {Globals.MaxSliderValue}.");
+            }
+            return val / Globals.MaxSliderValue;
+        }
+
+        /// <summary>
+        /// sets the Volume of the media player.
+        /// throws:
+        ///     ArgumentException
+        /// </summary>
         public void setVolume(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            double tmp = e.NewValue / Globals.MaxSliderValue;
+            double tmp = convertSliderPosToVolLevel(e.NewValue);
 
-            if (!(tmp <= 1) || !(tmp >= 0))
+            if (!(tmp >= 0) || !(tmp <= Globals.MaxVolume)) 
             {
-                MessageBox.Show("Invalid Volume: " + tmp);
+                throw new ArgumentException(
+                    $"Invalid Volume: {tmp}. Values must be greater than or equal to 0 and less than or equal to {Globals.MaxVolume}.");
             }
 
             if (Math.Abs(e.NewValue) < Globals.DoubleTolerance)
@@ -59,8 +80,8 @@ namespace FinalProjMediaPlayer
             }
             else
             {
-                _lastVolumeValue = tmp;
-                _lastVolumeSliderValue = e.NewValue;
+                LastOnVolumeValue = tmp;
+                LastOnVolumeSliderValue = e.NewValue;
                 forceOn();
             }
         }
@@ -69,9 +90,8 @@ namespace FinalProjMediaPlayer
 
         private readonly MediaElement _mediaElement;
         private readonly IToggle _volumeImageToggle;
-        private readonly Slider _volumeSlider; 
-        private double _lastVolumeValue;
-        private double _lastVolumeSliderValue;
-
+        private readonly Slider _volumeSlider;
+        public double LastOnVolumeValue { get; private set; }
+        public double LastOnVolumeSliderValue { get; private set; }
     }
 }

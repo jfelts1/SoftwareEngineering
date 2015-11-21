@@ -43,7 +43,9 @@ namespace FinalProjMediaPlayer
                     }
                 });
             _volumeHandler = new VolumeHandler(ref MediaElementMainWindow,
-                   ref SliderMainWindowSoundSlider,ref ImageMainWindowVolumePic);
+                ref SliderMainWindowSoundSlider,
+                ref ImageMainWindowVolumePic,
+                new BitmapImage(new Uri("pack://application:,,,/Icons/SoundfileNoSound_461.png")));
             IList<IMediaEntry> mediaEntries = searchForFilesAndGetInfo();
 
             _databaseHandler = new DatabaseHandler(mediaEntries);

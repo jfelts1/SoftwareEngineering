@@ -44,7 +44,7 @@ namespace FinalProjMediaPlayer
         public bool Toggled { get; private set; }
     }
 
-    public class ImageToggle<T> : IToggle<T>
+    public abstract class ImageToggle<T> : IToggle<T>
     {
         /// <summary>
         /// Defaults to the off state and the image from displayedImage
@@ -62,14 +62,14 @@ namespace FinalProjMediaPlayer
             return Toggled ? forceOff(offVar) : forceOn(onVar);
         }
 
-        public virtual bool forceOff(params T[] par)
+        public virtual bool forceOff(T par)
         {
             Toggled = false;
             _displayedImage.Source = _img2;
             return Toggled;
         }
 
-        public virtual bool forceOn(params T[] par)
+        public virtual bool forceOn(T par)
         {
             Toggled = true;
             _displayedImage.Source = _img1;

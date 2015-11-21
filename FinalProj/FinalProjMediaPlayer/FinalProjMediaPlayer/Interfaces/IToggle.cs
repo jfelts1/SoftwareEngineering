@@ -7,9 +7,9 @@ namespace FinalProjMediaPlayer.Interfaces
     {
         bool toggle(T offVar, T onVar);
         //forces the toggle to the off aka initial state
-        bool forceOff(params T[] par);
+        bool forceOff(T par);
         //forces the toggle to the on state
-        bool forceOn(params T[] par);
+        bool forceOn(T par);
 
         bool Toggled { get; }
 
