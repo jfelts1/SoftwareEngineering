@@ -86,14 +86,16 @@
     </Compile>
     <Compile Include="DatabaseInserter.cs" />
     <Compile Include="DatabaseSearcher.cs" />
+    <Compile Include="Extensions\MediaElementExtensions.cs" />
     <Compile Include="FunctionImageToggle.cs" />
     <Compile Include="Globals.cs" />
-    <Compile Include="Interfaces\IMediaEntry.cs" />
+    <Compile Include="MediaEntry.cs" />
     <Compile Include="MusicEntry.cs" />
     <Compile Include="MusicID3Tag.cs" />
     <Compile Include="QuickSearchWindow.xaml.cs">
       <DependentUpon>QuickSearchWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="VideoEntry.cs" />
     <Compile Include="VolumeHandler.cs" />
     <Page Include="AdvancedSearchWindow.xaml">

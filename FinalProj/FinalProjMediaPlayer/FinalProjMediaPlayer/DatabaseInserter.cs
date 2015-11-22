@@ -3,13 +3,12 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
-using FinalProjMediaPlayer.Interfaces;
 
 namespace FinalProjMediaPlayer
 {
     public partial class DatabaseHandler
     {
-        public DatabaseHandler(IList<IMediaEntry> mediaEntries)
+        public DatabaseHandler(IList<MediaEntry> mediaEntries)
         {
             _mediaEntries = mediaEntries;
             _dbConnection = new SQLiteConnection("Data source = MediaData.sqlite");
@@ -21,7 +20,7 @@ namespace FinalProjMediaPlayer
         {
             SQLiteCommand insertCom = new SQLiteCommand(_dbConnection);
             createTableIfNotFound();
-            foreach (IMediaEntry entry in _mediaEntries)
+            foreach (MediaEntry entry in _mediaEntries)
             {
                 if (entry is MusicEntry)
                 {
@@ -70,7 +69,7 @@ namespace FinalProjMediaPlayer
             _dbConnection.Close();
         }
 
-        private readonly IList<IMediaEntry> _mediaEntries;
+        private readonly IList<MediaEntry> _mediaEntries;
         private readonly SQLiteConnection _dbConnection;
     }
 }

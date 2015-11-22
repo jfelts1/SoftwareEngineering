@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using FinalProjMediaPlayer.Extensions;
 using FinalProjMediaPlayer.Interfaces;
 
 namespace FinalProjMediaPlayer
@@ -42,16 +43,29 @@ namespace FinalProjMediaPlayer
                         //MessageBox.Show("Pause");
                     }
                 });
+
             _volumeHandler = new VolumeHandler(ref MediaElementMainWindow,
                 ref SliderMainWindowSoundSlider,
                 ref ImageMainWindowVolumePic,
                 new BitmapImage(new Uri("pack://application:,,,/Icons/SoundfileNoSound_461.png")));
-            IList<IMediaEntry> mediaEntries = searchForFilesAndGetInfo();
+
+            IList<MediaEntry> mediaEntries = searchForFilesAndGetInfo();
 
             _databaseHandler = new DatabaseHandler(mediaEntries);
+            _mediaDict = new Dictionary<string, MediaEntry>();
+            populateListBox(mediaEntries,ListBoxMainWindowRecentlyPlayed);
         }
 
-        private static IList<IMediaEntry> searchForFilesAndGetInfo()
+        private void populateListBox(IEnumerable<MediaEntry> mediaEntries,ItemsControl box)
+        {
+            foreach (MediaEntry entry in mediaEntries)
+            {
+                box.Items.Add(entry.ToString());
+                _mediaDict.Add(entry.ToString(),entry);
+            }
+        }
+
+        private static IList<MediaEntry> searchForFilesAndGetInfo()
         {
             //Jess' code starts here
             ArrayList files = searchForFiles();
@@ -59,14 +73,14 @@ namespace FinalProjMediaPlayer
             //Jess' code ends here
 
             //Chelsea's code begins here
-            IList<IMediaEntry> mediaEntries = getMediaInfo(files);
+            IList<MediaEntry> mediaEntries = getMediaInfo(files);
 
             return mediaEntries;
         }
 
-        private static IList<IMediaEntry> getMediaInfo(IEnumerable files)
+        private static IList<MediaEntry> getMediaInfo(IEnumerable files)
         {
-            IList<IMediaEntry> mediaEntries = new List<IMediaEntry>();
+            IList<MediaEntry> mediaEntries = new List<MediaEntry>();
 
             foreach (string filePath in from object filePathObject in files select filePathObject.ToString())
             {
@@ -91,13 +105,38 @@ namespace FinalProjMediaPlayer
                     {
                         continue;
                     }
-                    string title = Encoding.Default.GetString(tag.title);
-                    string artist = Encoding.Default.GetString(tag.artist);
-                    string album = Encoding.Default.GetString(tag.album);
-                    string year = Encoding.Default.GetString(tag.year);
-                    string comment = Encoding.Default.GetString(tag.comment);
-                    string genre = Encoding.Default.GetString(tag.genre);
+                    string title = Encoding.Default.GetString(tag.title).removeNullTerminater().removeControlCharacters();
+                    string artist = Encoding.Default.GetString(tag.artist).removeNullTerminater().removeControlCharacters();
+                    string album = Encoding.Default.GetString(tag.album).removeNullTerminater().removeControlCharacters();
+                    string year = Encoding.Default.GetString(tag.year).removeNullTerminater().removeControlCharacters();
+                    string comment = Encoding.Default.GetString(tag.comment).removeNullTerminater().removeControlCharacters();
+                    string genre = Encoding.Default.GetString(tag.genre).removeNullTerminater().removeControlCharacters();
                     //long Length = Encoding.Default.GetString(tag.)
+
+                    if (string.IsNullOrEmpty(title))
+                    {
+                        title = Path.GetFileNameWithoutExtension(filePath);
+                    }
+                    if (string.IsNullOrEmpty(artist))
+                    {
+                        artist = "N/A";
+                    }
+                    if (string.IsNullOrEmpty(album))
+                    {
+                        album = "N/A";
+                    }
+                    if (string.IsNullOrEmpty(year))
+                    {
+                        year = "N/A";
+                    }
+                    if (string.IsNullOrEmpty(comment))
+                    {
+                        comment = "N/A";
+                    }
+                    if (string.IsNullOrEmpty(genre))
+                    {
+                        genre = "N/A";
+                    }
 
                     Console.WriteLine();
                     Console.WriteLine(@"Title: " + title);
@@ -108,7 +147,6 @@ namespace FinalProjMediaPlayer
                     Console.WriteLine(@"Genre: " + genre);
                     Console.WriteLine();
 
-                    // MusicEntry(string genre, string title, long length, string artist, string filePath)
                     MusicEntry m = new MusicEntry(genre, title, 0, artist, filePath);
                     mediaEntries.Add(m);
                 }
@@ -215,11 +253,30 @@ namespace FinalProjMediaPlayer
             _databaseHandler.shutdownDatabaseConnection();
         }
 
+        private void ListBoxMainWindowRecentlyPlayed_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            IList selected =  ListBoxMainWindowRecentlyPlayed.SelectedItems;
+            var s = selected[0] as string;
+            if (s != null)
+            {
+                string selectedValue = s;
+                MediaEntry selectedEntry = _mediaDict[selectedValue];
+                MediaElementMainWindow.loadMediaEntry(selectedEntry);
+                MediaElementMainWindow.Play();
+                MessageBox.Show(selectedEntry+" selected.");
+            }
+            else
+            {
+                throw new TypeAccessException("selectedValue is not a string");
+            }
+        }
+
         private readonly IToggle _pausePlayToggle;
         private readonly VolumeHandler _volumeHandler;
         private QuickSearchWindow _quickSearchWindow;
         private AdvancedSearchWindow _advancedSearchWindow;
         private readonly DatabaseHandler _databaseHandler;
+        private readonly Dictionary<string, MediaEntry> _mediaDict;
 
     }
 }

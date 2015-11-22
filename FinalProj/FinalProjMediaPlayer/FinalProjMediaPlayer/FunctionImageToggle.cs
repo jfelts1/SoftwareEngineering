@@ -68,7 +68,6 @@ namespace FinalProjMediaPlayer
         }
 
         private readonly Action<T> _actOff;
-
         private readonly Action<T> _actOn;
 
     }

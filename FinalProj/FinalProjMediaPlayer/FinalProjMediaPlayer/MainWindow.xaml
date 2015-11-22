@@ -20,9 +20,7 @@
             </MenuItem>
         </Menu>
         <Rectangle x:Name="RectangleMainWindow" Fill="#FFE6E6FF" HorizontalAlignment="Left" Height="454" Margin="627,0,0,0" Stroke="Black" VerticalAlignment="Top" Width="220" StrokeThickness="0"/>
-        <ListBox x:Name="ListBoxMainWindowRecentlyPlayed" HorizontalAlignment="Left" Height="349" Margin="627,40,0,0" VerticalAlignment="Top" Width="220" Background="#FFE6E6FF" BorderThickness="0,1">
-            <ListBoxItem x:Name="ListBoxItemMainWindowExample" Content="ExampleItem"/>
-        </ListBox>
+        <ListBox x:Name="ListBoxMainWindowRecentlyPlayed" HorizontalAlignment="Left" Height="349" Margin="627,40,0,0" VerticalAlignment="Top" Width="220" Background="#FFE6E6FF" BorderThickness="0,1" MouseDoubleClick="ListBoxMainWindowRecentlyPlayed_MouseDoubleClick"/>
         <Label x:Name="LabelMainWindowRecentlyPlayed" Content="Recently Played" HorizontalAlignment="Left" Margin="678,0,0,0" VerticalAlignment="Top" BorderThickness="1" Height="35" BorderBrush="Black" FontSize="16"/>
         <Slider x:Name="SliderMainWindowTimeSlider" HorizontalAlignment="Left" Margin="70,419,0,0" VerticalAlignment="Top" Width="407"/>
         <Label x:Name="LabelMainWindowTimer" Content="00:00" HorizontalAlignment="Left" Margin="32,417,0,0" VerticalAlignment="Top"/>
