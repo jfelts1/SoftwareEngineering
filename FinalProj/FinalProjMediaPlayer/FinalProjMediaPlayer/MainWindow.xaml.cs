@@ -258,12 +258,11 @@ namespace FinalProjMediaPlayer
             IList selected =  ListBoxMainWindowRecentlyPlayed.SelectedItems;
             var s = selected[0] as string;
             if (s != null)
-            {
-                string selectedValue = s;
-                MediaEntry selectedEntry = _mediaDict[selectedValue];
+            {          
+                MediaEntry selectedEntry = _mediaDict[s];
                 MediaElementMainWindow.loadMediaEntry(selectedEntry);
                 MediaElementMainWindow.Play();
-                MessageBox.Show(selectedEntry+" selected.");
+                //MessageBox.Show(selectedEntry+" selected.");
             }
             else
             {

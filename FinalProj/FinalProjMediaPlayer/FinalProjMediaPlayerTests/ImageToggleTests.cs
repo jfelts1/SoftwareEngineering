@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FinalProjMediaPlayerTests
 {
-    [TestClass()]
+    [TestClass]
     public class ImageToggleTests
     {
         [TestMethod]
