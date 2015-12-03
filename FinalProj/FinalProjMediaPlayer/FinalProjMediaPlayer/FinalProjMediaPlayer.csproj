@@ -96,6 +96,7 @@
       <DependentUpon>QuickSearchWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="TimeSliderHandler.cs" />
     <Compile Include="VideoEntry.cs" />
     <Compile Include="VolumeHandler.cs" />
     <Page Include="AdvancedSearchWindow.xaml">
