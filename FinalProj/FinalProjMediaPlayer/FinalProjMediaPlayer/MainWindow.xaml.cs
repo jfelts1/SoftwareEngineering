@@ -61,6 +61,7 @@ namespace FinalProjMediaPlayer
             foreach (MediaEntry entry in mediaEntries)
             {
                 box.Items.Add(entry.ToString());
+                
                 _mediaDict.Add(entry.ToString(),entry);
             }
         }
@@ -268,6 +269,11 @@ namespace FinalProjMediaPlayer
             {
                 throw new TypeAccessException("selectedValue is not a string");
             }
+        }
+
+        private void TextBoxMainWindowQuickSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
 
         private readonly IToggle _pausePlayToggle;

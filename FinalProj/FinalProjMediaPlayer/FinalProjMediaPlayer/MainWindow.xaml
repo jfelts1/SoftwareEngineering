@@ -26,7 +26,7 @@
         <Label x:Name="LabelMainWindowTimer" Content="00:00" HorizontalAlignment="Left" Margin="32,417,0,0" VerticalAlignment="Top"/>
         <Image x:Name="ImageMainWindowPausePlayButton" HorizontalAlignment="Left" Height="21" Margin="10,419,0,0" VerticalAlignment="Top" Width="22" Source="Icons/Symbols_Pause_16xLG.png" MouseLeftButtonDown="pausePlayToggle"/>
         <Label x:Name="LabelMainWindowQuickSearch" Content="QuickSearch" HorizontalAlignment="Left" Margin="630,394,0,0" VerticalAlignment="Top" Width="75"/>
-        <TextBox x:Name="TextBoxMainWindowQuickSearch" HorizontalAlignment="Left" Height="23" Margin="630,419,0,0" TextWrapping="Wrap" Text="Enter name of a artist to search for" VerticalAlignment="Top" Width="207"/>
+        <TextBox x:Name="TextBoxMainWindowQuickSearch" HorizontalAlignment="Left" Height="23" Margin="630,419,0,0" TextWrapping="Wrap" Text="Enter name of a artist to search for" VerticalAlignment="Top" Width="207" TextChanged="TextBoxMainWindowQuickSearch_TextChanged"/>
         <Image x:Name="ImageMainWindowVolumePic" HorizontalAlignment="Left" Height="12" Margin="477,424,0,0" VerticalAlignment="Top" Width="12" Source="Icons/Soundfile_461.png" MouseLeftButtonDown="volumeOnOffToggle"/>
         <Slider x:Name="SliderMainWindowSoundSlider" HorizontalAlignment="Left" Margin="494,418,0,0" VerticalAlignment="Top" Width="128" ValueChanged="SliderMainWindowSoundSlider_ValueChanged" Value="11"/>
 
