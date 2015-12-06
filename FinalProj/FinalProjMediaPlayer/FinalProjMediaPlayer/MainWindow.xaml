@@ -3,8 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:self="clr-namespace:FinalProjMediaPlayer"
         mc:Ignorable="d"
         Title="Team-Ctrl-Alt-Delete Media Player" Height="483.666" Width="855" Closing="MainWindow1_Closing">
+    <Window.CommandBindings>
+        <CommandBinding Command="self:CustomCommands.PlayListEntry" Executed="PlayListEntry"/>
+    </Window.CommandBindings>
     <Grid x:Name="GridMainWindow" Margin="0,0,0,-5">
         <MediaElement x:Name="MediaElementMainWindow" HorizontalAlignment="Left" Height="386" Margin="10,28,0,0" VerticalAlignment="Top" Width="612" LoadedBehavior="Manual"/>
         <Menu x:Name="MenuMainWindow" HorizontalAlignment="Left" Height="23" VerticalAlignment="Top" Width="627">
@@ -20,8 +24,8 @@
             </MenuItem>
         </Menu>
         <Rectangle x:Name="RectangleMainWindow" Fill="#FFE6E6FF" HorizontalAlignment="Left" Height="454" Margin="627,0,0,0" Stroke="Black" VerticalAlignment="Top" Width="220" StrokeThickness="0"/>
-        <ListBox x:Name="ListBoxMainWindowRecentlyPlayed" HorizontalAlignment="Left" Height="349" Margin="627,40,0,0" VerticalAlignment="Top" Width="220" Background="#FFE6E6FF" BorderThickness="0,1" MouseDoubleClick="ListBoxMainWindowRecentlyPlayed_MouseDoubleClick"/>
-        <Label x:Name="LabelMainWindowRecentlyPlayed" Content="Recently Played" HorizontalAlignment="Left" Margin="678,0,0,0" VerticalAlignment="Top" BorderThickness="1" Height="35" BorderBrush="Black" FontSize="16"/>
+        <ListBox x:Name="ListBoxMainWindowRecentlyPlayed" HorizontalAlignment="Left" Height="349" Margin="627,40,0,0" VerticalAlignment="Top" Width="220" Background="#FFE6E6FF" BorderThickness="0,1" MouseDoubleClick="ListBoxMainWindowRecentlyPlayed_MouseDoubleClick" SelectionMode="Extended"/>
+        <Label x:Name="LabelMainWindowRecentlyPlayed" Content="Currently Playing" HorizontalAlignment="Left" Margin="670,0,0,0" VerticalAlignment="Top" BorderThickness="1" Height="35" BorderBrush="Black" FontSize="16"/>
         <Slider x:Name="SliderMainWindowTimeSlider" HorizontalAlignment="Left" Margin="70,419,0,0" VerticalAlignment="Top" Width="407"/>
         <Label x:Name="LabelMainWindowTimer" Content="00:00" HorizontalAlignment="Left" Margin="32,417,0,0" VerticalAlignment="Top"/>
         <Image x:Name="ImageMainWindowPausePlayButton" HorizontalAlignment="Left" Height="21" Margin="10,419,0,0" VerticalAlignment="Top" Width="22" Source="Icons/Symbols_Pause_16xLG.png" MouseLeftButtonDown="pausePlayToggle"/>

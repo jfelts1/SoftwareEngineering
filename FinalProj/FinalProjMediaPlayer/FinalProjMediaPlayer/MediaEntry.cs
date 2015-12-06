@@ -23,7 +23,7 @@ namespace FinalProjMediaPlayer
         public int Id { get; }
         public override string ToString()
         {
-            return Id + "-" + Title;
+            return Title;
         }
 
         private static int _id;

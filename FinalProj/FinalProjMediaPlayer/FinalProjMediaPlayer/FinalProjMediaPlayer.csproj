@@ -32,7 +32,7 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>x64</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -86,12 +86,16 @@
     </Compile>
     <Compile Include="DatabaseInserter.cs" />
     <Compile Include="DatabaseSearcher.cs" />
+    <Compile Include="Extensions\IListExtensions.cs" />
     <Compile Include="Extensions\MediaElementExtensions.cs" />
     <Compile Include="FunctionImageToggle.cs" />
     <Compile Include="Globals.cs" />
+    <Compile Include="Interfaces\IPlayList.cs" />
+    <Compile Include="MainWindowUtils.cs" />
     <Compile Include="MediaEntry.cs" />
     <Compile Include="MusicEntry.cs" />
     <Compile Include="MusicID3Tag.cs" />
+    <Compile Include="PlayList.cs" />
     <Compile Include="QuickSearchWindow.xaml.cs">
       <DependentUpon>QuickSearchWindow.xaml</DependentUpon>
     </Compile>
