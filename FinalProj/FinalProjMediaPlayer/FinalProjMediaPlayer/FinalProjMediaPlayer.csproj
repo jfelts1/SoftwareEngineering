@@ -87,15 +87,16 @@
     <Compile Include="DatabaseInserter.cs" />
     <Compile Include="DatabaseSearcher.cs" />
     <Compile Include="Extensions\IListExtensions.cs" />
+    <Compile Include="Interfaces\IRandomAccessIterator.cs" />
     <Compile Include="Extensions\MediaElementExtensions.cs" />
     <Compile Include="FunctionImageToggle.cs" />
     <Compile Include="Globals.cs" />
-    <Compile Include="Interfaces\IPlayList.cs" />
     <Compile Include="MainWindowUtils.cs" />
     <Compile Include="MediaEntry.cs" />
     <Compile Include="MusicEntry.cs" />
     <Compile Include="MusicID3Tag.cs" />
     <Compile Include="PlayList.cs" />
+    <Compile Include="PlayListUtils.cs" />
     <Compile Include="QuickSearchWindow.xaml.cs">
       <DependentUpon>QuickSearchWindow.xaml</DependentUpon>
     </Compile>

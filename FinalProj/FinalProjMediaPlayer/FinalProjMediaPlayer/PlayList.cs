@@ -1,43 +1,23 @@
 ﻿//     James Felts 2015
 
+using System;
 using System.Collections;
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using FinalProjMediaPlayer.Interfaces;
 
 namespace FinalProjMediaPlayer
 {
-    public class PlayList : IPlayList
+    [Serializable]
+    public partial class Playlist : IEnumerable, IRandomAccessIterator
     {
-        public PlayList(IList rawList)
+        public Playlist(IEnumerable collection)
         {
-            RawList = rawList;
-        }
-
-        public PlayList(string filePath)
-        {
-            loadFromDisk(filePath);
-        }
-        
-        public IList RawList { get; private set; }
-
-        public void loadFromDisk(string filePath)
-        {
-            using (FileStream fs = new FileStream(filePath,FileMode.Open))
+            RawList = new ArrayList();
+            foreach (var ele in collection)
             {
-                BinaryFormatter bf = new BinaryFormatter();
-                RawList = bf.Deserialize(fs) as IList;
+                RawList.Add(ele);
             }
-        }
-
-        public void saveToDisk(string filePath, string filename)
-        {
-            using (FileStream fs = new FileStream(filePath+"/"+filename,FileMode.Create))
-            {
-                   BinaryFormatter bf = new BinaryFormatter();
-                   bf.Serialize(fs,RawList);
-            }
+            Current = RawList[_index];
         }
 
         public override string ToString()
@@ -54,5 +34,73 @@ namespace FinalProjMediaPlayer
         {
             return RawList.GetEnumerator();
         }
+
+        public bool MoveNext()
+        {
+            return MoveNext(1);
+        }
+
+        public bool MoveNext(int advanceBy)
+        {
+            _index+=advanceBy;
+            if (_index >= RawList.Count)
+            {
+                return false;
+            }
+            Current = RawList[_index];
+            return true;
+        }
+
+        public bool MovePrev()
+        {
+            return MovePrev(1);
+        }
+
+        public bool MovePrev(int advanceBy)
+        {
+            _index-=advanceBy;
+            if (_index <= 0)
+            {
+                return false;
+            }
+            Current = RawList[_index];
+            return true;
+        }
+
+        public void Reset()
+        {
+            _index = 0;
+            Current = RawList[_index];
+        }
+
+        private IList RawList
+        {
+            get
+            {
+                return _rawList;
+            }
+            set
+            {
+                _rawList = value;
+            }
+        }
+
+        public object Current {
+            get
+            {
+                return _current;
+            }
+            set
+            {
+                _index = RawList.IndexOf(value);
+                _current = value;
+            }
+        }
+
+        [NonSerialized]
+        private int _index;
+        [NonSerialized]
+        private object _current;
+        private IList _rawList;
     }
 }

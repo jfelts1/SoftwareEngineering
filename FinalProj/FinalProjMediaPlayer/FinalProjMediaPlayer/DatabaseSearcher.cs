@@ -3,14 +3,13 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
-using System.Diagnostics;
 
 namespace FinalProjMediaPlayer
 {
     public partial class DatabaseHandler
     {
 
-        public IEnumerable<string> searchByTitle(string searchArtist, string searchGenre)
+        public IEnumerable<string> searchByArtistAndGenre(string searchArtist, string searchGenre)
         {
             SQLiteCommand searchCom = new SQLiteCommand(_dbConnection);
             if (searchArtist != null && searchGenre == null)//search Artist

@@ -24,23 +24,11 @@ namespace FinalProjMediaPlayer
             {
                 if (entry is MusicEntry)
                 {
-                    insertCom.CommandText = "insert or ignore into Music (Title, Artist, Genre, Length, FilePath) " +
-                                            "values (?,?,?,?,?)";
-                    insertCom.Parameters.Add("@Title", DbType.String).Value = entry.Title;
-                    insertCom.Parameters.Add("@Artist", DbType.String).Value = entry.Creator;
-                    insertCom.Parameters.Add("@Genre", DbType.String).Value = entry.Genre;
-                    insertCom.Parameters.Add("@Length", DbType.Int64).Value = entry.Length;
-                    insertCom.Parameters.Add("@FilePath", DbType.String).Value = entry.FilePath;
+                    insertMusicEntry(ref insertCom, entry);
                 }
                 else if(entry is VideoEntry)
                 {
-                    insertCom.CommandText = "insert or ignore into Video (Title, Publisher, Genre, Length, FilePath) " +
-                                            "values (?,?,?,?,?)";
-                    insertCom.Parameters.Add("@Title", DbType.String).Value = entry.Title;
-                    insertCom.Parameters.Add("@Publisher", DbType.String).Value = entry.Creator;
-                    insertCom.Parameters.Add("@Genre", DbType.String).Value = entry.Genre;
-                    insertCom.Parameters.Add("@Length", DbType.Int64).Value = entry.Length;
-                    insertCom.Parameters.Add("@FilePath", DbType.String).Value = entry.FilePath;
+                    insertVideoEntry(ref insertCom, entry);
                 }
                 else
                 {
@@ -48,6 +36,28 @@ namespace FinalProjMediaPlayer
                 }
                 insertCom.ExecuteNonQuery();
             }
+        }
+
+        private static void insertMusicEntry(ref SQLiteCommand insertCom, MediaEntry entry)
+        {
+            insertCom.CommandText = "insert or ignore into Music (Title, Artist, Genre, Length, FilePath) " +
+                                    "values (?,?,?,?,?)";
+            insertCom.Parameters.Add("@Title", DbType.String).Value = entry.Title;
+            insertCom.Parameters.Add("@Artist", DbType.String).Value = entry.Creator;
+            insertCom.Parameters.Add("@Genre", DbType.String).Value = entry.Genre;
+            insertCom.Parameters.Add("@Length", DbType.Int64).Value = entry.Length;
+            insertCom.Parameters.Add("@FilePath", DbType.String).Value = entry.FilePath;
+        }
+
+        private static void insertVideoEntry(ref SQLiteCommand insertCom, MediaEntry entry)
+        {
+            insertCom.CommandText = "insert or ignore into Video (Title, Publisher, Genre, Length, FilePath) " +
+                                    "values (?,?,?,?,?)";
+            insertCom.Parameters.Add("@Title", DbType.String).Value = entry.Title;
+            insertCom.Parameters.Add("@Publisher", DbType.String).Value = entry.Creator;
+            insertCom.Parameters.Add("@Genre", DbType.String).Value = entry.Genre;
+            insertCom.Parameters.Add("@Length", DbType.Int64).Value = entry.Length;
+            insertCom.Parameters.Add("@FilePath", DbType.String).Value = entry.FilePath;
         }
 
         private void createTableIfNotFound()

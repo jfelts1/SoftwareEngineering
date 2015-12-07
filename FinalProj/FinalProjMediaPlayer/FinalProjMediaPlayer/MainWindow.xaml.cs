@@ -5,7 +5,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
-using FinalProjMediaPlayer.Extensions;
 using FinalProjMediaPlayer.Interfaces;
 
 namespace FinalProjMediaPlayer
@@ -50,7 +49,8 @@ namespace FinalProjMediaPlayer
 
             _databaseHandler = new DatabaseHandler(mediaEntries);
             _mediaDict = new Dictionary<string, MediaEntry>();
-            populateListBox(mediaEntries,ListBoxMainWindowRecentlyPlayed);
+            initListBoxValues(mediaEntries,ListBoxMainWindowRecentlyPlayed);
+            _currentPlaylist = new Playlist(ListBoxMainWindowRecentlyPlayed.Items);
         }
 
         public void closeQuickSearchWindow()
@@ -115,17 +115,9 @@ namespace FinalProjMediaPlayer
         private void ListBoxMainWindowRecentlyPlayed_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             IList selected =  ListBoxMainWindowRecentlyPlayed.SelectedItems;
-            var s = selected[0] as string;
-            if (s != null)
-            {          
-                MediaEntry selectedEntry = _mediaDict[s];
-                MediaElementMainWindow.loadMediaEntry(selectedEntry);
-                MediaElementMainWindow.Play();
-            }
-            else
-            {
-                throw new TypeAccessException("selectedValue is not a string");
-            }
+            _currentPlaylist.Current = selected[0];
+            string s = selected[0] as string;
+            playMedia(s);
         }
 
         private void TextBoxMainWindowQuickSearch_TextChanged(object sender, TextChangedEventArgs e)
@@ -136,12 +128,36 @@ namespace FinalProjMediaPlayer
             }
         }
 
+        private void MediaElementMainWindow_MediaEnded(object sender, RoutedEventArgs e)
+        {
+            if (CheckBoxMainWindowRepeat.IsChecked == true)
+            {
+                string s = _currentPlaylist.Current as string;
+                playMedia(s);
+            }
+            else
+            {
+                bool notEndOfList =_currentPlaylist.MoveNext();
+                if (notEndOfList)
+                {                
+                    string s = _currentPlaylist.Current as string;
+                    playMedia(s);
+                }
+                else
+                {
+                    _currentPlaylist.Reset();
+                    string s = _currentPlaylist.Current as string;
+                    playMedia(s);
+                }              
+            }
+        }
+
         private readonly IToggle _pausePlayToggle;
         private readonly VolumeHandler _volumeHandler;
         private QuickSearchWindow _quickSearchWindow;
         private AdvancedSearchWindow _advancedSearchWindow;
         private readonly DatabaseHandler _databaseHandler;
         private readonly Dictionary<string, MediaEntry> _mediaDict;
-        private IPlayList _currentPlayList;
+        private Playlist _currentPlaylist;
     }
 }

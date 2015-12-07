@@ -9,13 +9,13 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using FinalProjMediaPlayer.Extensions;
-using FinalProjMediaPlayer.Interfaces;
+using Microsoft.Win32;
 
 namespace FinalProjMediaPlayer
 {
     public partial class MainWindow
     {
-        private void populateListBox(IEnumerable<MediaEntry> mediaEntries, ItemsControl box)
+        private void initListBoxValues(IEnumerable<MediaEntry> mediaEntries, ItemsControl box)
         {
             foreach (var entry in mediaEntries)
             {
@@ -24,12 +24,19 @@ namespace FinalProjMediaPlayer
             }
         }
 
-        private static void populateListBox(IEnumerable playlist, ItemsControl box)
+        private void populateListBox(IEnumerable playlist, ItemsControl box)
         {
             box.Items.Clear();
             foreach (var media in playlist)
             {
-                box.Items.Add(media.ToString());
+                if (_mediaDict.ContainsKey(media.ToString()))
+                {                    
+                    box.Items.Add(media.ToString());
+                }
+                else
+                {
+                    MessageBox.Show("Media file not in database. Not adding to playlist."+media);
+                }
             }
         }
 
@@ -161,25 +168,93 @@ namespace FinalProjMediaPlayer
             return files;
         }
 
-        private void PlayListEntry(object sender, RoutedEventArgs e)
+        private void enterPlayList(object sender, RoutedEventArgs e)
         {
             IList selected = ListBoxMainWindowRecentlyPlayed.SelectedItems.Clone();
             
-            IPlayList playList = new PlayList(selected);
+            Playlist playlist = new Playlist(selected);
             
-            populateListBox(playList,ListBoxMainWindowRecentlyPlayed);
-            //MessageBox.Show(playList.ToString());
-            playList.saveToDisk(Environment.CurrentDirectory,"test.playlist");
-            //IPlayList test = new PlayList(Environment.CurrentDirectory+"/"+"test.playlist");
-            //MessageBox.Show(test.ToString());
+            populateListBox(playlist,ListBoxMainWindowRecentlyPlayed);
+            _currentPlaylist = playlist;
+        }
+
+        private void savePlayList(object sender, RoutedEventArgs e)
+        {
+            if (_currentPlaylist == null)
+            {
+                MessageBox.Show("There is no playlist to save.");
+                return;
+            }
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                FileName = "playlist",
+                DefaultExt = ".playlist",
+                Filter = "Playlists (.playlist)|*.playlist"
+            };
+
+            bool? result = saveFileDialog.ShowDialog();
+
+            if (result != true)
+            {
+                //MessageBox.Show("Unable to save playlist.");
+                return;
+            }
+            string filename = saveFileDialog.FileName;
+            Playlist.save(filename,_currentPlaylist);
+        }
+
+        private void loadPlayList(object sender, RoutedEventArgs e)
+        {         
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                FileName = "playlist",
+                DefaultExt = ".playlist",
+                Filter = "Playlists (.playlist)|*.playlist"
+            };
+
+            bool? result = openFileDialog.ShowDialog();
+
+            if (result != true)
+            {
+                //MessageBox.Show("Unable to open playlist.");
+                return;
+            }
+            string filename = openFileDialog.FileName;
+
+            _currentPlaylist = Playlist.load(filename);
+            populateListBox(_currentPlaylist,ListBoxMainWindowRecentlyPlayed);
+        }
+
+        private void playMedia(string s)
+        {
+            if (s != null)
+            {
+                MediaEntry selectedEntry = _mediaDict[s];
+                MediaElementMainWindow.loadMediaEntry(selectedEntry);
+                MediaElementMainWindow.Play();
+            }
+            else
+            {
+                throw new TypeAccessException("selectedValue is not a string");
+            }
         }
     }
 
     public static class CustomCommands
     {
-        public static readonly RoutedUICommand PlayListEntry = new RoutedUICommand("PlayListEntry",
-            "PlayListEntry",
+        public static readonly RoutedUICommand EnterPlaylist = new RoutedUICommand("EnterPlaylist",
+            "enterPlayList",
             typeof (CustomCommands),
             new InputGestureCollection() {new KeyGesture(Key.Enter, ModifierKeys.None)});
+
+        public static readonly RoutedUICommand SavePlaylist = new RoutedUICommand("SavePlaylist",
+            "savePlayList",
+            typeof (CustomCommands),
+            new InputGestureCollection() {new KeyGesture(Key.S, ModifierKeys.Control)});
+
+        public static readonly RoutedUICommand LoadPlaylist = new RoutedUICommand("LoadPlaylist",
+            "loadPlayList",
+            typeof (CustomCommands),
+            new InputGestureCollection() {new KeyGesture(Key.O, ModifierKeys.Control)});
     }
 }

@@ -5,14 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:self="clr-namespace:FinalProjMediaPlayer"
         mc:Ignorable="d"
-        Title="Team-Ctrl-Alt-Delete Media Player" Height="483.666" Width="855" Closing="MainWindow1_Closing">
+        Title="Team-Ctrl-Alt-Delete Media Player" Height="505.166" Width="855" Closing="MainWindow1_Closing">
     <Window.CommandBindings>
-        <CommandBinding Command="self:CustomCommands.PlayListEntry" Executed="PlayListEntry"/>
+        <CommandBinding Command="self:CustomCommands.EnterPlaylist" Executed="enterPlayList"/>
+        <CommandBinding Command="self:CustomCommands.LoadPlaylist" Executed="loadPlayList"/>
+        <CommandBinding Command="self:CustomCommands.SavePlaylist" Executed="savePlayList"/>
     </Window.CommandBindings>
     <Grid x:Name="GridMainWindow" Margin="0,0,0,-5">
-        <MediaElement x:Name="MediaElementMainWindow" HorizontalAlignment="Left" Height="386" Margin="10,28,0,0" VerticalAlignment="Top" Width="612" LoadedBehavior="Manual"/>
+        <MediaElement x:Name="MediaElementMainWindow" HorizontalAlignment="Left" Height="386" Margin="10,28,0,0" VerticalAlignment="Top" Width="612" LoadedBehavior="Manual" MediaEnded="MediaElementMainWindow_MediaEnded"/>
         <Menu x:Name="MenuMainWindow" HorizontalAlignment="Left" Height="23" VerticalAlignment="Top" Width="627">
             <MenuItem x:Name="MenuItemMainWindowFile" Header="_File">
+                <MenuItem x:Name="MenuItemMainWindowFileSavePlaylist" Header="_Save Playlist" HorizontalAlignment="Left" Width="200" Margin="0,0,-10,0" Command="self:CustomCommands.SavePlaylist"/>
+                <MenuItem x:Name="MenuItemMainWindowFileLoadPlaylist" Header="_Load Playlist" HorizontalAlignment="Left" Width="200" Margin="0,0,-10,0" Command="self:CustomCommands.LoadPlaylist"/>
                 <MenuItem x:Name="MenuItemMainWindowFileExit" Header="E_xit" HorizontalAlignment="Left" Width="145" Click="exitProgram"/>
             </MenuItem>
             <MenuItem x:Name="MenuItemMainWindowSearch" Header="_Search">
@@ -23,16 +27,17 @@
                 <MenuItem x:Name="MenuItemMainWindowHelpAbout" Header="_About" HorizontalAlignment="Left" Width="145" Click="openAboutWindow"/>
             </MenuItem>
         </Menu>
-        <Rectangle x:Name="RectangleMainWindow" Fill="#FFE6E6FF" HorizontalAlignment="Left" Height="454" Margin="627,0,0,0" Stroke="Black" VerticalAlignment="Top" Width="220" StrokeThickness="0"/>
-        <ListBox x:Name="ListBoxMainWindowRecentlyPlayed" HorizontalAlignment="Left" Height="349" Margin="627,40,0,0" VerticalAlignment="Top" Width="220" Background="#FFE6E6FF" BorderThickness="0,1" MouseDoubleClick="ListBoxMainWindowRecentlyPlayed_MouseDoubleClick" SelectionMode="Extended"/>
+        <Rectangle x:Name="RectangleMainWindow" Fill="#FFE6E6FF" HorizontalAlignment="Left" Height="475" Margin="627,0,0,0" Stroke="Black" VerticalAlignment="Top" Width="220" StrokeThickness="0"/>
+        <ListBox x:Name="ListBoxMainWindowRecentlyPlayed" HorizontalAlignment="Left" Height="374" Margin="627,40,0,0" VerticalAlignment="Top" Width="220" Background="#FFE6E6FF" BorderThickness="0,1" MouseDoubleClick="ListBoxMainWindowRecentlyPlayed_MouseDoubleClick" SelectionMode="Extended"/>
         <Label x:Name="LabelMainWindowRecentlyPlayed" Content="Currently Playing" HorizontalAlignment="Left" Margin="670,0,0,0" VerticalAlignment="Top" BorderThickness="1" Height="35" BorderBrush="Black" FontSize="16"/>
         <Slider x:Name="SliderMainWindowTimeSlider" HorizontalAlignment="Left" Margin="70,419,0,0" VerticalAlignment="Top" Width="407"/>
         <Label x:Name="LabelMainWindowTimer" Content="00:00" HorizontalAlignment="Left" Margin="32,417,0,0" VerticalAlignment="Top"/>
         <Image x:Name="ImageMainWindowPausePlayButton" HorizontalAlignment="Left" Height="21" Margin="10,419,0,0" VerticalAlignment="Top" Width="22" Source="Icons/Symbols_Pause_16xLG.png" MouseLeftButtonDown="pausePlayToggle"/>
-        <Label x:Name="LabelMainWindowQuickSearch" Content="QuickSearch" HorizontalAlignment="Left" Margin="630,394,0,0" VerticalAlignment="Top" Width="75"/>
-        <TextBox x:Name="TextBoxMainWindowQuickSearch" HorizontalAlignment="Left" Height="23" Margin="630,419,0,0" TextWrapping="Wrap" Text="Enter name of a artist to search for" VerticalAlignment="Top" Width="207" TextChanged="TextBoxMainWindowQuickSearch_TextChanged"/>
+        <Label x:Name="LabelMainWindowQuickSearch" Content="QuickSearch" HorizontalAlignment="Left" Margin="630,414,0,0" VerticalAlignment="Top" Width="75"/>
+        <TextBox x:Name="TextBoxMainWindowQuickSearch" HorizontalAlignment="Left" Height="23" Margin="630,439,0,0" TextWrapping="Wrap" Text="Enter name of a artist to search for" VerticalAlignment="Top" Width="207" TextChanged="TextBoxMainWindowQuickSearch_TextChanged"/>
         <Image x:Name="ImageMainWindowVolumePic" HorizontalAlignment="Left" Height="12" Margin="477,424,0,0" VerticalAlignment="Top" Width="12" Source="Icons/Soundfile_461.png" MouseLeftButtonDown="volumeOnOffToggle"/>
         <Slider x:Name="SliderMainWindowSoundSlider" HorizontalAlignment="Left" Margin="494,418,0,0" VerticalAlignment="Top" Width="128" ValueChanged="SliderMainWindowSoundSlider_ValueChanged" Value="11"/>
+        <CheckBox x:Name="CheckBoxMainWindowRepeat" Content="Repeat" HorizontalAlignment="Left" Margin="15,446,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>
