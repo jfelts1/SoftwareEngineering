@@ -22,8 +22,7 @@ namespace FinalProjMediaPlayer
             }
             else if (searchArtist != null)//search Both
             {
-                searchCom.CommandText = "SELECT Title FROM Music, Video WHERE Artist OR Publisher LIKE '%@searchArtist%' AND Genre LIKE '%@searchGenre%';";
-
+                searchCom.CommandText = "SELECT Music.Title FROM Music WHERE Music.Artist LIKE '%@searchArtist%' AND Music.Genre Like '%@searchGenre%' Union SELECT Video.Title FROM VIdeo WHERE Video.Publisher LIKE '@SearchArtist%' AND Music.Genre Like '%@searchGenre%';";
                 searchCom.Parameters.Add(new SQLiteParameter("@searchArtist", DbType.String).Value = searchArtist);
                 searchCom.Parameters.Add(new SQLiteParameter("@searchGenre", DbType.String).Value = searchGenre);
                
@@ -38,7 +37,7 @@ namespace FinalProjMediaPlayer
             {
                 return getList(searchCom);
             }
-            searchCom.CommandText = "SELECT Title FROM Music, Video WHERE Artist OR Publisher LIKE @searchArtist;";
+            searchCom.CommandText = "SELECT Music.Title FROM Music WHERE Music.Artist LIKE '%@searchArtist%' Union SELECT Video.Title FROM VIdeo WHERE Video.Publisher LIKE '@SearchArtist%';";
             searchCom.CommandType = CommandType.Text;
             searchCom.Parameters.AddWithValue("searchArtist", artist);
 
@@ -52,7 +51,7 @@ namespace FinalProjMediaPlayer
             {
                 return getList(searchCom);
             }
-            searchCom.CommandText = "SELECT Title FROM Music, Video WHERE Genre LIKE '%@searchGenre%';";
+            searchCom.CommandText = "SELECT Music.Title FROM Music WHERE Music.Genre LIKE '%@searchGenre%' Union SELECT Video.Title FROM VIdeo WHERE Video.Genre LIKE '@SearchGenre%';";
             searchCom.Parameters.Add(new SQLiteParameter("@searchGenre", DbType.String).Value = genre);
 
             return getList(searchCom);
