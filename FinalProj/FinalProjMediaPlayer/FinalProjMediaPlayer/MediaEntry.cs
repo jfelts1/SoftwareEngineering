@@ -11,8 +11,6 @@ namespace FinalProjMediaPlayer
             Length = length;
             Creator = creator;
             FilePath = filePath;
-            _id++;
-            Id = _id;
         }
 
         public string Genre { get; }
@@ -20,12 +18,10 @@ namespace FinalProjMediaPlayer
         public long Length { get; }
         public string Creator { get; }
         public string FilePath { get; }
-        public int Id { get; }
+
         public override string ToString()
         {
             return Title;
         }
-
-        private static int _id;
     }
 }

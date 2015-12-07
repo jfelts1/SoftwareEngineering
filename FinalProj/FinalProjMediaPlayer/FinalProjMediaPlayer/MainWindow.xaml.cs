@@ -51,6 +51,8 @@ namespace FinalProjMediaPlayer
             _mediaDict = new Dictionary<string, MediaEntry>();
             initListBoxValues(mediaEntries,ListBoxMainWindowRecentlyPlayed);
             _currentPlaylist = new Playlist(ListBoxMainWindowRecentlyPlayed.Items);
+            _timeSliderHandler = new TimeSliderHandler(ref MediaElementMainWindow,ref SliderMainWindowTimeSlider);
+            
         }
 
         public void closeQuickSearchWindow()
@@ -130,26 +132,31 @@ namespace FinalProjMediaPlayer
 
         private void MediaElementMainWindow_MediaEnded(object sender, RoutedEventArgs e)
         {
+            string s;
             if (CheckBoxMainWindowRepeat.IsChecked == true)
             {
-                string s = _currentPlaylist.Current as string;
-                playMedia(s);
+                s = _currentPlaylist.Current as string;
+                
             }
             else
             {
                 bool notEndOfList =_currentPlaylist.MoveNext();
                 if (notEndOfList)
                 {                
-                    string s = _currentPlaylist.Current as string;
-                    playMedia(s);
+                    s = _currentPlaylist.Current as string;
                 }
                 else
                 {
                     _currentPlaylist.Reset();
-                    string s = _currentPlaylist.Current as string;
-                    playMedia(s);
+                    s = _currentPlaylist.Current as string;
                 }              
             }
+            playMedia(s);
+        }
+
+        private void SliderMainWindowTimeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            _timeSliderHandler.updateMediaPosition();
         }
 
         private readonly IToggle _pausePlayToggle;
@@ -159,5 +166,8 @@ namespace FinalProjMediaPlayer
         private readonly DatabaseHandler _databaseHandler;
         private readonly Dictionary<string, MediaEntry> _mediaDict;
         private Playlist _currentPlaylist;
+        private readonly TimeSliderHandler _timeSliderHandler;
+        private MediaEntry _currentlyPlaying;
+
     }
 }

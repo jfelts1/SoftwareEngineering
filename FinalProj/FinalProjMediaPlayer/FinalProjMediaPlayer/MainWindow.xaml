@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:self="clr-namespace:FinalProjMediaPlayer"
         mc:Ignorable="d"
-        Title="Team-Ctrl-Alt-Delete Media Player" Height="505.166" Width="855" Closing="MainWindow1_Closing">
+        Title="Team-Ctrl-Alt-Delete Media Player" Height="505.166" Width="855" Closing="MainWindow1_Closing" ResizeMode="CanMinimize">
     <Window.CommandBindings>
         <CommandBinding Command="self:CustomCommands.EnterPlaylist" Executed="enterPlayList"/>
         <CommandBinding Command="self:CustomCommands.LoadPlaylist" Executed="loadPlayList"/>
@@ -30,7 +30,7 @@
         <Rectangle x:Name="RectangleMainWindow" Fill="#FFE6E6FF" HorizontalAlignment="Left" Height="475" Margin="627,0,0,0" Stroke="Black" VerticalAlignment="Top" Width="220" StrokeThickness="0"/>
         <ListBox x:Name="ListBoxMainWindowRecentlyPlayed" HorizontalAlignment="Left" Height="374" Margin="627,40,0,0" VerticalAlignment="Top" Width="220" Background="#FFE6E6FF" BorderThickness="0,1" MouseDoubleClick="ListBoxMainWindowRecentlyPlayed_MouseDoubleClick" SelectionMode="Extended"/>
         <Label x:Name="LabelMainWindowRecentlyPlayed" Content="Currently Playing" HorizontalAlignment="Left" Margin="670,0,0,0" VerticalAlignment="Top" BorderThickness="1" Height="35" BorderBrush="Black" FontSize="16"/>
-        <Slider x:Name="SliderMainWindowTimeSlider" HorizontalAlignment="Left" Margin="70,419,0,0" VerticalAlignment="Top" Width="407"/>
+        <Slider x:Name="SliderMainWindowTimeSlider" HorizontalAlignment="Left" Margin="70,419,0,0" VerticalAlignment="Top" Width="407" ValueChanged="SliderMainWindowTimeSlider_ValueChanged"/>
         <Label x:Name="LabelMainWindowTimer" Content="00:00" HorizontalAlignment="Left" Margin="32,417,0,0" VerticalAlignment="Top"/>
         <Image x:Name="ImageMainWindowPausePlayButton" HorizontalAlignment="Left" Height="21" Margin="10,419,0,0" VerticalAlignment="Top" Width="22" Source="Icons/Symbols_Pause_16xLG.png" MouseLeftButtonDown="pausePlayToggle"/>
         <Label x:Name="LabelMainWindowQuickSearch" Content="QuickSearch" HorizontalAlignment="Left" Margin="630,414,0,0" VerticalAlignment="Top" Width="75"/>

@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -232,6 +233,7 @@ namespace FinalProjMediaPlayer
                 MediaEntry selectedEntry = _mediaDict[s];
                 MediaElementMainWindow.loadMediaEntry(selectedEntry);
                 MediaElementMainWindow.Play();
+                _currentlyPlaying = selectedEntry;
             }
             else
             {
