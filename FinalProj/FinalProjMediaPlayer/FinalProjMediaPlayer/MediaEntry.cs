@@ -4,7 +4,7 @@ namespace FinalProjMediaPlayer
 {
     public abstract class MediaEntry
     {
-        protected MediaEntry(string genre, string title, long length, string creator, string filePath)
+        protected MediaEntry(string genre, string title, ulong length, string creator, string filePath)
         {
             Genre = genre;
             Title = title;
@@ -15,7 +15,7 @@ namespace FinalProjMediaPlayer
 
         public string Genre { get; }
         public string Title { get; }
-        public long Length { get; }
+        public ulong Length { get; }
         public string Creator { get; }
         public string FilePath { get; }
 

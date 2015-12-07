@@ -4,7 +4,7 @@ namespace FinalProjMediaPlayer
 {
     public class MusicEntry : MediaEntry
     {
-        public MusicEntry(string genre, string title, long length, string artist, string filePath) :base(genre,title,length,artist,filePath)
+        public MusicEntry(string genre, string title, ulong length, string artist, string filePath) :base(genre,title,length,artist,filePath)
         { }
     }
 }

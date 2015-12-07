@@ -132,6 +132,8 @@ namespace FinalProjMediaPlayer
 
         private void MediaElementMainWindow_MediaEnded(object sender, RoutedEventArgs e)
         {
+            var tmp = e.RoutedEvent;
+            //MessageBox.Show(tmp.ToString());
             string s;
             if (CheckBoxMainWindowRepeat.IsChecked == true)
             {

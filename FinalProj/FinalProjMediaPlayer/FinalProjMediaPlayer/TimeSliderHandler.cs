@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace FinalProjMediaPlayer
@@ -21,7 +22,8 @@ namespace FinalProjMediaPlayer
             if (_slider.Value > Globals.DoubleTolerance)
             {
                 double mediaDur = _mediaElement.NaturalDuration.TimeSpan.TotalSeconds;
-                TimeSpan targetPosition = TimeSpan.FromSeconds(mediaDur/(_slider.Value/Globals.MaxSliderValue));
+                TimeSpan targetPosition = TimeSpan.FromSeconds(mediaDur/(_slider.Value));
+                MessageBox.Show("mediaDur"+_mediaElement.NaturalDuration.TimeSpan.ToString()+"\ntargetPosition"+targetPosition.ToString());
                 _mediaElement.Position = targetPosition;
             }
             else

@@ -4,13 +4,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.IO;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using FinalProjMediaPlayer.Extensions;
 using Microsoft.Win32;
+using Microsoft.WindowsAPICodePack.Shell;
 
 namespace FinalProjMediaPlayer
 {
@@ -61,6 +61,10 @@ namespace FinalProjMediaPlayer
             {
                 using (FileStream fs = File.OpenRead(filePath))
                 {
+                    ShellFile fin = ShellFile.FromFilePath(filePath);
+                    ulong? test = fin.Properties.System.Media.Duration.Value;
+                    ulong len = convertNanoSecondsToMiliSeconds(test);
+
                     if (fs.Length < 128)
                     {
                         continue;
@@ -87,6 +91,7 @@ namespace FinalProjMediaPlayer
                     string comment = Encoding.Default.GetString(tag.comment).removeNullTerminater().removeControlCharacters();
                     string genre = Encoding.Default.GetString(tag.genre).removeNullTerminater().removeControlCharacters();
                     //long Length = Encoding.Default.GetString(tag.)
+
 
                     if (string.IsNullOrEmpty(title))
                     {
@@ -122,11 +127,20 @@ namespace FinalProjMediaPlayer
                     Console.WriteLine(@"Genre: " + genre);
                     Console.WriteLine();
 
-                    MusicEntry m = new MusicEntry(genre, title, 0, artist, filePath);
+                    MusicEntry m = new MusicEntry(genre, title, len, artist, filePath);
                     mediaEntries.Add(m);
                 }
             }
             return mediaEntries;
+        }
+
+        private static ulong convertNanoSecondsToMiliSeconds(ulong? val)
+        {
+            if (val != null)
+            {
+                return (ulong) ((double) val*0.0001);
+            }
+            throw new FormatException("val does not reprsent a numeric value.");
         }
 
         private static ArrayList searchForFiles()
