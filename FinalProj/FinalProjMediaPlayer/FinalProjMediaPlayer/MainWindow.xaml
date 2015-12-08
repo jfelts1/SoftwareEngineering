@@ -28,7 +28,7 @@
             </MenuItem>
         </Menu>
         <Rectangle x:Name="RectangleMainWindow" Fill="#FFE6E6FF" HorizontalAlignment="Left" Height="475" Margin="627,0,0,0" Stroke="Black" VerticalAlignment="Top" Width="220" StrokeThickness="0"/>
-        <ListBox x:Name="ListBoxMainWindowRecentlyPlayed" HorizontalAlignment="Left" Height="374" Margin="627,40,0,0" VerticalAlignment="Top" Width="220" Background="#FFE6E6FF" BorderThickness="0,1" MouseDoubleClick="ListBoxMainWindowRecentlyPlayed_MouseDoubleClick" SelectionMode="Extended"/>
+        <ListBox x:Name="ListBoxMainWindowRecentlyPlayed" HorizontalAlignment="Left" Height="347" Margin="627,67,0,0" VerticalAlignment="Top" Width="220" Background="#FFE6E6FF" BorderThickness="0,1" MouseDoubleClick="ListBoxMainWindowRecentlyPlayed_MouseDoubleClick" SelectionMode="Extended"/>
         <Label x:Name="LabelMainWindowRecentlyPlayed" Content="Currently Playing" HorizontalAlignment="Left" Margin="670,0,0,0" VerticalAlignment="Top" BorderThickness="1" Height="35" BorderBrush="Black" FontSize="16"/>
         <Slider x:Name="SliderMainWindowTimeSlider" HorizontalAlignment="Left" Margin="70,419,0,0" VerticalAlignment="Top" Width="407" ValueChanged="SliderMainWindowTimeSlider_ValueChanged"/>
         <Label x:Name="LabelMainWindowTimer" Content="00:00" HorizontalAlignment="Left" Margin="32,417,0,0" VerticalAlignment="Top"/>
@@ -38,6 +38,7 @@
         <Image x:Name="ImageMainWindowVolumePic" HorizontalAlignment="Left" Height="12" Margin="477,424,0,0" VerticalAlignment="Top" Width="12" Source="Icons/Soundfile_461.png" MouseLeftButtonDown="volumeOnOffToggle"/>
         <Slider x:Name="SliderMainWindowSoundSlider" HorizontalAlignment="Left" Margin="494,418,0,0" VerticalAlignment="Top" Width="128" ValueChanged="SliderMainWindowSoundSlider_ValueChanged" Value="11"/>
         <CheckBox x:Name="CheckBoxMainWindowRepeat" Content="Repeat" HorizontalAlignment="Left" Margin="15,446,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="LabelMainWindowCurrentlyPlaying" Content="" HorizontalAlignment="Left" Margin="630,40,0,0" VerticalAlignment="Top" Width="209"/>
 
     </Grid>
 </Window>

@@ -140,7 +140,7 @@ namespace FinalProjMediaPlayer
             {
                 return (ulong) ((double) val*0.0001);
             }
-            throw new FormatException("val does not reprsent a numeric value.");
+            throw new FormatException("val does not represent a numeric value.");
         }
 
         private static ArrayList searchForFiles()
@@ -248,6 +248,7 @@ namespace FinalProjMediaPlayer
                 MediaElementMainWindow.loadMediaEntry(selectedEntry);
                 MediaElementMainWindow.Play();
                 _currentlyPlaying = selectedEntry;
+                LabelMainWindowCurrentlyPlaying.Content = _currentlyPlaying.Title;
             }
             else
             {

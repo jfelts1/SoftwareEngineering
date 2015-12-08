@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 using FinalProjMediaPlayer.Interfaces;
 
 namespace FinalProjMediaPlayer
@@ -51,8 +52,16 @@ namespace FinalProjMediaPlayer
             _mediaDict = new Dictionary<string, MediaEntry>();
             initListBoxValues(mediaEntries,ListBoxMainWindowRecentlyPlayed);
             _currentPlaylist = new Playlist(ListBoxMainWindowRecentlyPlayed.Items);
-            _timeSliderHandler = new TimeSliderHandler(ref MediaElementMainWindow,ref SliderMainWindowTimeSlider);
-            
+            _timeSliderHandler = new TimeSliderHandler(ref MediaElementMainWindow,
+                ref SliderMainWindowTimeSlider,
+                ref LabelMainWindowTimer);
+
+            _timer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromMilliseconds(100)
+            };
+            _timer.Tick += (source, e) => { _timeSliderHandler.updateSliderPosition(source,e);};
+            _timer.Start();
         }
 
         public void closeQuickSearchWindow()
@@ -132,13 +141,10 @@ namespace FinalProjMediaPlayer
 
         private void MediaElementMainWindow_MediaEnded(object sender, RoutedEventArgs e)
         {
-            var tmp = e.RoutedEvent;
-            //MessageBox.Show(tmp.ToString());
             string s;
             if (CheckBoxMainWindowRepeat.IsChecked == true)
             {
                 s = _currentPlaylist.Current as string;
-                
             }
             else
             {
@@ -170,6 +176,6 @@ namespace FinalProjMediaPlayer
         private Playlist _currentPlaylist;
         private readonly TimeSliderHandler _timeSliderHandler;
         private MediaEntry _currentlyPlaying;
-
+        private DispatcherTimer _timer;
     }
 }
