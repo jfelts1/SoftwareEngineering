@@ -10,6 +10,7 @@
         <CommandBinding Command="self:CustomCommands.EnterPlaylist" Executed="enterPlayList"/>
         <CommandBinding Command="self:CustomCommands.LoadPlaylist" Executed="loadPlayList"/>
         <CommandBinding Command="self:CustomCommands.SavePlaylist" Executed="savePlayList"/>
+        <CommandBinding Command="self:CustomCommands.LoadDefaultPlaylist" Executed="loadDefaultPlaylist"/>
     </Window.CommandBindings>
     <Grid x:Name="GridMainWindow" Margin="0,0,0,-5">
         <MediaElement x:Name="MediaElementMainWindow" HorizontalAlignment="Left" Height="386" Margin="10,28,0,0" VerticalAlignment="Top" Width="612" LoadedBehavior="Manual" MediaEnded="MediaElementMainWindow_MediaEnded" UnloadedBehavior="Manual"/>
@@ -17,6 +18,7 @@
             <MenuItem x:Name="MenuItemMainWindowFile" Header="_File">
                 <MenuItem x:Name="MenuItemMainWindowFileSavePlaylist" Header="_Save Playlist" HorizontalAlignment="Left" Width="200" Margin="0,0,-10,0" Command="self:CustomCommands.SavePlaylist"/>
                 <MenuItem x:Name="MenuItemMainWindowFileLoadPlaylist" Header="_Load Playlist" HorizontalAlignment="Left" Width="200" Margin="0,0,-10,0" Command="self:CustomCommands.LoadPlaylist"/>
+                <MenuItem x:Name="MenuItemMainWindowFileDefaultPlaylist" Header="Default Playlist" HorizontalAlignment="Left" Width="230" Margin="0,0,-40,0" Command="self:CustomCommands.LoadDefaultPlaylist"/>
                 <MenuItem x:Name="MenuItemMainWindowFileExit" Header="E_xit" HorizontalAlignment="Left" Width="145" Click="exitProgram"/>
             </MenuItem>
             <MenuItem x:Name="MenuItemMainWindowSearch" Header="_Search">

@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Text;
 using FinalProjMediaPlayer.Interfaces;
 
@@ -11,6 +12,16 @@ namespace FinalProjMediaPlayer
     public partial class Playlist : IEnumerable, IRandomAccessIterator
     {
         public Playlist(IEnumerable collection)
+        {
+            RawList = new ArrayList();
+            foreach (var ele in collection)
+            {
+                RawList.Add(ele);
+            }
+            Current = RawList[_index];
+        }
+
+        public Playlist(IEnumerable<string> collection)
         {
             RawList = new ArrayList();
             foreach (var ele in collection)

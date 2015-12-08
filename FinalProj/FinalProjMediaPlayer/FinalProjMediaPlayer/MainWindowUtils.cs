@@ -118,6 +118,7 @@ namespace FinalProjMediaPlayer
                         genre = "N/A";
                     }
 
+#if DEBUG
                     Console.WriteLine();
                     Console.WriteLine(@"Title: " + title);
                     Console.WriteLine(@"Artist: " + artist);
@@ -126,6 +127,7 @@ namespace FinalProjMediaPlayer
                     Console.WriteLine(@"Comment: " + comment);
                     Console.WriteLine(@"Genre: " + genre);
                     Console.WriteLine();
+#endif
 
                     MusicEntry m = new MusicEntry(genre, title, len, artist, filePath);
                     mediaEntries.Add(m);
@@ -138,7 +140,7 @@ namespace FinalProjMediaPlayer
         {
             if (val != null)
             {
-                return (ulong) ((double) val*0.0001);
+                return (ulong) ((double) val*0.0000001);
             }
             throw new FormatException("val does not represent a numeric value.");
         }
@@ -147,11 +149,15 @@ namespace FinalProjMediaPlayer
         {
             string[] mp3Files = Directory.GetFiles(Directory.GetCurrentDirectory(), "*.mp3");
             string[] aviFiles = Directory.GetFiles(Directory.GetCurrentDirectory(), "*.avi");
+#if DEBUG
             Console.WriteLine(@"Current Working Directory: " + Directory.GetCurrentDirectory());
+#endif
             ArrayList files = new ArrayList(mp3Files.Length + aviFiles.Length);
             if (mp3Files.Length == 0)
             {
+#if DEBUG
                 Console.WriteLine(@"Error: No_MP3_Doge"); // (╯°□°）╯︵ ┻━┻
+#endif
             }
             else
             {
@@ -163,7 +169,9 @@ namespace FinalProjMediaPlayer
             }
             if (aviFiles.Length == 0)
             {
+#if DEBUG
                 Console.WriteLine(@"Error: No_AVI_Doge"); // (╯°□°）╯︵ ┻━┻
+#endif
             }
             else
             {
@@ -173,12 +181,13 @@ namespace FinalProjMediaPlayer
                     files.Add(t);
                 }
             }
-
+#if DEBUG
             Console.WriteLine(@"ArrayList: ");
             foreach (object curLine in files)
             {
                 Console.WriteLine(curLine);
             }
+#endif
             Console.ReadLine();
             return files;
         }
@@ -186,11 +195,14 @@ namespace FinalProjMediaPlayer
         private void enterPlayList(object sender, RoutedEventArgs e)
         {
             IList selected = ListBoxMainWindowRecentlyPlayed.SelectedItems.Clone();
+            if (selected.Count > 0)
+            {
+                Playlist playlist = new Playlist(selected);
             
-            Playlist playlist = new Playlist(selected);
-            
-            populateListBox(playlist,ListBoxMainWindowRecentlyPlayed);
-            _currentPlaylist = playlist;
+                populateListBox(playlist,ListBoxMainWindowRecentlyPlayed);
+                _currentPlaylist = playlist;                
+            }
+
         }
 
         private void savePlayList(object sender, RoutedEventArgs e)
@@ -248,12 +260,19 @@ namespace FinalProjMediaPlayer
                 MediaElementMainWindow.loadMediaEntry(selectedEntry);
                 MediaElementMainWindow.Play();
                 _currentlyPlaying = selectedEntry;
-                LabelMainWindowCurrentlyPlaying.Content = _currentlyPlaying.Title;
+                TimeSpan time = TimeSpan.FromSeconds(_currentlyPlaying.Length);
+                LabelMainWindowCurrentlyPlaying.Content = $"{_currentlyPlaying.Title} ({time.Minutes,2:D2}:{time.Seconds,2:D2})";
             }
             else
             {
                 throw new TypeAccessException("selectedValue is not a string");
             }
+        }
+
+        private void loadDefaultPlaylist(object sender, RoutedEventArgs e)
+        {
+            _currentPlaylist = _defaultPlaylist;
+            populateListBox(_currentPlaylist,ListBoxMainWindowRecentlyPlayed);
         }
     }
 
@@ -262,16 +281,22 @@ namespace FinalProjMediaPlayer
         public static readonly RoutedUICommand EnterPlaylist = new RoutedUICommand("EnterPlaylist",
             "enterPlayList",
             typeof (CustomCommands),
-            new InputGestureCollection() {new KeyGesture(Key.Enter, ModifierKeys.None)});
+            new InputGestureCollection {new KeyGesture(Key.Enter, ModifierKeys.None)});
 
         public static readonly RoutedUICommand SavePlaylist = new RoutedUICommand("SavePlaylist",
             "savePlayList",
             typeof (CustomCommands),
-            new InputGestureCollection() {new KeyGesture(Key.S, ModifierKeys.Control)});
+            new InputGestureCollection {new KeyGesture(Key.S, ModifierKeys.Control)});
 
         public static readonly RoutedUICommand LoadPlaylist = new RoutedUICommand("LoadPlaylist",
             "loadPlayList",
             typeof (CustomCommands),
-            new InputGestureCollection() {new KeyGesture(Key.O, ModifierKeys.Control)});
+            new InputGestureCollection {new KeyGesture(Key.O, ModifierKeys.Control)});
+
+        public static readonly RoutedUICommand LoadDefaultPlaylist = new RoutedUICommand("LoadDefaultPlaylist",
+            "loadDefaultPlaylist",
+            typeof (CustomCommands),
+            new InputGestureCollection {new KeyGesture(Key.D, ModifierKeys.Control)});
+
     }
 }

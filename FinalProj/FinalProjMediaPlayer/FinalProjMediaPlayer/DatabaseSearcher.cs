@@ -1,5 +1,7 @@
 ﻿//     James Felts 2015
 //put searching behaviour for the database in this file
+
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
@@ -22,10 +24,14 @@ namespace FinalProjMediaPlayer
             }
             else if (searchArtist != null)//search Both
             {
-                searchCom.CommandText = "SELECT Music.Title FROM Music WHERE Music.Artist LIKE '%@searchArtist%' AND Music.Genre Like '%@searchGenre%' Union SELECT Video.Title FROM VIdeo WHERE Video.Publisher LIKE '@SearchArtist%' AND Music.Genre Like '%@searchGenre%';";
-                searchCom.Parameters.Add(new SQLiteParameter("@searchArtist", DbType.String).Value = searchArtist);
-                searchCom.Parameters.Add(new SQLiteParameter("@searchGenre", DbType.String).Value = searchGenre);
-               
+                searchCom.CommandText =
+                    @"SELECT Title FROM Music WHERE Artist LIKE @searchArtist AND Genre Like @searchGenre Union all SELECT Title FROM Video WHERE Publisher LIKE @searchArtist AND Genre Like @searchGenre";
+                searchCom.CommandType = CommandType.Text;
+
+                searchCom.Parameters.AddWithValue("@searchArtist", $"%{searchArtist}%");
+                searchCom.Parameters.AddWithValue("@searchGenre", $"%{searchGenre}%");
+                searchCom.Prepare();
+
             }
             return getList(searchCom);
         }
@@ -37,10 +43,12 @@ namespace FinalProjMediaPlayer
             {
                 return getList(searchCom);
             }
-            searchCom.CommandText = "SELECT Music.Title FROM Music WHERE Music.Artist LIKE '%@searchArtist%' Union SELECT Video.Title FROM VIdeo WHERE Video.Publisher LIKE '@SearchArtist%';";
+            searchCom.CommandText =
+                @"SELECT Title FROM Music WHERE Artist LIKE @searchArtist UNION ALL SELECT Title FROM Video WHERE Publisher LIKE @searchArtist";
             searchCom.CommandType = CommandType.Text;
-            searchCom.Parameters.AddWithValue("searchArtist", artist);
-
+            searchCom.Parameters.AddWithValue("@searchArtist", $"%{artist}%");
+            searchCom.Prepare();
+            
             return getList(searchCom);
         }
 
@@ -51,8 +59,10 @@ namespace FinalProjMediaPlayer
             {
                 return getList(searchCom);
             }
-            searchCom.CommandText = "SELECT Music.Title FROM Music WHERE Music.Genre LIKE '%@searchGenre%' Union SELECT Video.Title FROM VIdeo WHERE Video.Genre LIKE '@SearchGenre%';";
-            searchCom.Parameters.Add(new SQLiteParameter("@searchGenre", DbType.String).Value = genre);
+            searchCom.CommandText =
+                @"SELECT Title FROM Music WHERE Genre LIKE @searchGenre Union ALL SELECT Title FROM Video WHERE Genre LIKE @searchGenre;";
+            searchCom.Parameters.AddWithValue("@searchGenre", $"%{genre}%");
+            searchCom.Prepare();
 
             return getList(searchCom);
         } 
@@ -64,11 +74,14 @@ namespace FinalProjMediaPlayer
             {
                 throw new NoNullAllowedException("The CommandText must initalized");
             }
+            
             SQLiteDataReader reader = searchCom.ExecuteReader();
+            
             List<string> listFound = new List<string>();
-            for (int x = 0; reader.NextResult(); x++)
+
+            while(reader.Read())
             {
-                listFound.Add(reader.GetString(x));
+                listFound.Add(reader["Title"].ToString());
             }
             return listFound;
         }

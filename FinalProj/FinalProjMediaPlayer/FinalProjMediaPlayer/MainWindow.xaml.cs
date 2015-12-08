@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.SQLite;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -17,6 +19,9 @@ namespace FinalProjMediaPlayer
     {
         public MainWindow()
         {
+#if DEBUG
+            Environment.SetEnvironmentVariable("SQLite_ForceLogPrepare","True");
+#endif
             InitializeComponent();
             _pausePlayToggle = new FunctionImageToggle(new BitmapImage(new Uri("pack://application:,,,/Icons/Symbols_Play_16xLG.png")),
                                                ref ImageMainWindowPausePlayButton,
@@ -51,6 +56,7 @@ namespace FinalProjMediaPlayer
             _databaseHandler = new DatabaseHandler(mediaEntries);
             _mediaDict = new Dictionary<string, MediaEntry>();
             initListBoxValues(mediaEntries,ListBoxMainWindowRecentlyPlayed);
+            _defaultPlaylist = new Playlist(ListBoxMainWindowRecentlyPlayed.Items);
             _currentPlaylist = new Playlist(ListBoxMainWindowRecentlyPlayed.Items);
             _timeSliderHandler = new TimeSliderHandler(ref MediaElementMainWindow,
                 ref SliderMainWindowTimeSlider,
@@ -121,6 +127,7 @@ namespace FinalProjMediaPlayer
         private void MainWindow1_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             _databaseHandler.shutdownDatabaseConnection();
+            _timer.Stop();
         }
 
         private void ListBoxMainWindowRecentlyPlayed_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -133,10 +140,20 @@ namespace FinalProjMediaPlayer
 
         private void TextBoxMainWindowQuickSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (_databaseHandler != null)
-            {              
-                IEnumerable<string> tmp = _databaseHandler.searchByArtist(e.ToString());
+            if (_databaseHandler == null)
+            {
+                return;
             }
+            IEnumerable<string> tmp = _databaseHandler.searchByArtist(TextBoxMainWindowQuickSearch.Text);
+            IEnumerable<string> enumerable = tmp as string[] ?? tmp.ToArray();
+#if DEBUG
+            Console.WriteLine(@"Found Items");
+            foreach (var ele in enumerable)
+            {
+               Console.WriteLine(ele); 
+            }
+#endif
+            populateListBox(enumerable,ListBoxMainWindowRecentlyPlayed);
         }
 
         private void MediaElementMainWindow_MediaEnded(object sender, RoutedEventArgs e)
@@ -174,8 +191,9 @@ namespace FinalProjMediaPlayer
         private readonly DatabaseHandler _databaseHandler;
         private readonly Dictionary<string, MediaEntry> _mediaDict;
         private Playlist _currentPlaylist;
+        private readonly Playlist _defaultPlaylist;
         private readonly TimeSliderHandler _timeSliderHandler;
         private MediaEntry _currentlyPlaying;
-        private DispatcherTimer _timer;
+        private readonly DispatcherTimer _timer;
     }
 }
