@@ -1,4 +1,4 @@
-﻿//     James Felts 2015
+﻿//     Team Ctrl-Alt-Delete
 
 using System.Windows.Controls;
 using System.Windows.Media;

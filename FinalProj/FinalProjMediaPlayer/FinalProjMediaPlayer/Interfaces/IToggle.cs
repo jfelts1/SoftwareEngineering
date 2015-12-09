@@ -1,4 +1,4 @@
-﻿//     James Felts 2015
+﻿//     Team Ctrl-Alt-Delete
 
 namespace FinalProjMediaPlayer.Interfaces
 {

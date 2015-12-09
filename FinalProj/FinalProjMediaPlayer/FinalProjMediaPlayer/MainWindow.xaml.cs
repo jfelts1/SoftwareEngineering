@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Data.SQLite;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -78,6 +77,12 @@ namespace FinalProjMediaPlayer
         public void closeAdvancedSearchWindow()
         {
             _advancedSearchWindow.Close();
+        }
+
+        public void searchDatabase(string artist, string genre)
+        {
+            IEnumerable<string> res =_databaseHandler.searchByArtistAndGenre(artist, genre);
+            populateListBox(res,ListBoxMainWindowRecentlyPlayed);
         }
 
         private void exitProgram(object sender, RoutedEventArgs e)

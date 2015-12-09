@@ -1,7 +1,6 @@
-﻿//     James Felts 2015
+﻿//     Team Ctrl-Alt-Delete
 //put searching behaviour for the database in this file
 
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
@@ -14,15 +13,15 @@ namespace FinalProjMediaPlayer
         public IEnumerable<string> searchByArtistAndGenre(string searchArtist, string searchGenre)
         {
             SQLiteCommand searchCom = new SQLiteCommand(_dbConnection);
-            if (searchArtist != null && searchGenre == null)//search Artist
+            if (!string.IsNullOrEmpty(searchArtist)&& string.IsNullOrEmpty(searchGenre))//search Artist
             {
                 return searchByArtist(searchArtist);
             }
-            else if (searchArtist == null && searchGenre != null)//search Genre
+            else if (string.IsNullOrEmpty(searchArtist) && !string.IsNullOrEmpty(searchGenre))//search Genre
             {
                 return searchByGenre(searchGenre);
             }
-            else if (searchArtist != null)//search Both
+            else if (!string.IsNullOrEmpty(searchArtist))//search Both
             {
                 searchCom.CommandText =
                     @"SELECT Title FROM Music WHERE Artist LIKE @searchArtist AND Genre Like @searchGenre Union all SELECT Title FROM Video WHERE Publisher LIKE @searchArtist AND Genre Like @searchGenre";

@@ -1,4 +1,4 @@
-﻿//     James Felts 2015
+﻿//     Team Ctrl-Alt-Delete
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -44,26 +44,47 @@ namespace FinalProjMediaPlayer
         private static IList<MediaEntry> searchForFilesAndGetInfo()
         {
             //Jess' code starts here
-            ArrayList files = searchForFiles();
+            string[] mp3;
+            string[] avi;
+            searchForFiles(out mp3,out avi);
             //Jess' code ends here
 
             //Chelsea's code begins here
-            IList<MediaEntry> mediaEntries = getMediaInfo(files);
+            IList<MediaEntry> mediaEntries = getMediaInfo(mp3,avi);
 
             return mediaEntries;
         }
 
-        private static IList<MediaEntry> getMediaInfo(IEnumerable files)
+        private static IList<MediaEntry> getMediaInfo(IEnumerable<string> mp3, IEnumerable<string> avi)
+        {
+            IList<MediaEntry> mediaEntries = readMp3Info(mp3);
+            foreach (var ele in readAviInfo(avi))
+            {
+                mediaEntries.Add(ele);
+            }
+            return mediaEntries;
+        }
+
+        private static IList<MediaEntry> readMp3Info(IEnumerable<string> mp3)
         {
             IList<MediaEntry> mediaEntries = new List<MediaEntry>();
-
-            foreach (string filePath in from object filePathObject in files select filePathObject.ToString())
+            foreach (string filePath in from object filePathObject in mp3 select filePathObject.ToString())
             {
                 using (FileStream fs = File.OpenRead(filePath))
                 {
                     ShellFile fin = ShellFile.FromFilePath(filePath);
                     ulong? test = fin.Properties.System.Media.Duration.Value;
                     ulong len = convertNanoSecondsToMiliSeconds(test);
+                    string[] tmp = fin.Properties.System.Music.Genre.Value;
+                    string genre;
+                    if (tmp != null)
+                    {
+                        genre = tmp[0];
+                    }
+                    else
+                    {
+                        genre = "N/A";                        
+                    }
 
                     if (fs.Length < 128)
                     {
@@ -89,9 +110,8 @@ namespace FinalProjMediaPlayer
                     string album = Encoding.Default.GetString(tag.album).removeNullTerminater().removeControlCharacters();
                     string year = Encoding.Default.GetString(tag.year).removeNullTerminater().removeControlCharacters();
                     string comment = Encoding.Default.GetString(tag.comment).removeNullTerminater().removeControlCharacters();
-                    string genre = Encoding.Default.GetString(tag.genre).removeNullTerminater().removeControlCharacters();
+                    //string genre = Encoding.Default.GetString(tag.genre).removeNullTerminater().removeControlCharacters();
                     //long Length = Encoding.Default.GetString(tag.)
-
 
                     if (string.IsNullOrEmpty(title))
                     {
@@ -136,6 +156,28 @@ namespace FinalProjMediaPlayer
             return mediaEntries;
         }
 
+        private static IList<MediaEntry> readAviInfo(IEnumerable<string> avi)
+        {
+            IList<MediaEntry> mediaEntries = new List<MediaEntry>();
+            foreach (string filePath in from object filePathObject in avi select filePathObject.ToString())
+            {
+                ShellFile fin = ShellFile.FromFilePath(filePath);
+                string publisher = fin.Properties.System.Media.Publisher.Value;
+                string title = fin.Properties.System.Title.Value;
+                if (string.IsNullOrEmpty(title))
+                {
+                    title = Path.GetFileNameWithoutExtension(filePath);
+                }
+
+                //string genre = fin.Properties.System.
+                ulong? tmp = fin.Properties.System.Media.Duration.Value;
+                ulong len = convertNanoSecondsToMiliSeconds(tmp);
+                VideoEntry v = new VideoEntry("N/A",title,len,publisher,filePath);
+                mediaEntries.Add(v);
+            }
+            return mediaEntries;
+        }
+
         private static ulong convertNanoSecondsToMiliSeconds(ulong? val)
         {
             if (val != null)
@@ -145,15 +187,15 @@ namespace FinalProjMediaPlayer
             throw new FormatException("val does not represent a numeric value.");
         }
 
-        private static ArrayList searchForFiles()
+        private static ArrayList searchForFiles(out string[] mp3, out string[] avi)
         {
-            string[] mp3Files = Directory.GetFiles(Directory.GetCurrentDirectory(), "*.mp3");
-            string[] aviFiles = Directory.GetFiles(Directory.GetCurrentDirectory(), "*.avi");
+            mp3 = Directory.GetFiles(Directory.GetCurrentDirectory(), "*.mp3");
+            avi = Directory.GetFiles(Directory.GetCurrentDirectory(), "*.avi");
 #if DEBUG
             Console.WriteLine(@"Current Working Directory: " + Directory.GetCurrentDirectory());
 #endif
-            ArrayList files = new ArrayList(mp3Files.Length + aviFiles.Length);
-            if (mp3Files.Length == 0)
+            ArrayList files = new ArrayList(mp3.Length + avi.Length);
+            if (mp3.Length == 0)
             {
 #if DEBUG
                 Console.WriteLine(@"Error: No_MP3_Doge"); // (╯°□°）╯︵ ┻━┻
@@ -161,13 +203,13 @@ namespace FinalProjMediaPlayer
             }
             else
             {
-                foreach (string t in mp3Files)
+                foreach (string t in mp3)
                 {
                     Console.WriteLine(t);
                     files.Add(t);
                 }
             }
-            if (aviFiles.Length == 0)
+            if (avi.Length == 0)
             {
 #if DEBUG
                 Console.WriteLine(@"Error: No_AVI_Doge"); // (╯°□°）╯︵ ┻━┻
@@ -175,7 +217,7 @@ namespace FinalProjMediaPlayer
             }
             else
             {
-                foreach (string t in aviFiles)
+                foreach (string t in avi)
                 {
                     Console.WriteLine(t);
                     files.Add(t);
