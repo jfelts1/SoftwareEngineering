@@ -14,21 +14,31 @@ namespace FinalProjMediaPlayer
         public Playlist(IEnumerable collection)
         {
             RawList = new ArrayList();
+            bool stuff = false;
             foreach (var ele in collection)
             {
                 RawList.Add(ele);
+                stuff = true;
             }
-            Current = RawList[_index];
+            if (stuff)
+            {                
+                Current = RawList[_index];
+            }
         }
 
         public Playlist(IEnumerable<string> collection)
         {
             RawList = new ArrayList();
+            bool stuff = false;
             foreach (var ele in collection)
             {
                 RawList.Add(ele);
+                stuff = true;
             }
-            Current = RawList[_index];
+            if (stuff)
+            {                
+                Current = RawList[_index];
+            }
         }
 
         public override string ToString()
