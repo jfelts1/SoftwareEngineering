@@ -1,3 +1,6 @@
+Our current version has problems running on Windows 8.1/10 however we've had no problems with Windows 7
+You can run the already present .exe file in the bin/ release or debug folder 
+
 Compile
 Load it in Visual Studio and build.
 Visual Studio should automaticcaly get the WindowsAPICodePack from NuGet but if it doesn't do 
@@ -12,3 +15,4 @@ Should automaticcaly cycle through in the order listed
 To make playlist Select all the items from the list you want in the playlist and press enter
 Save Load and Default playlist are in the File menu
 Various searches are under the Search Menu
+
