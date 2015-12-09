@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinalProjMediaPlayer", "Fin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinalProjMediaPlayerTests", "FinalProjMediaPlayerTests\FinalProjMediaPlayerTests.csproj", "{A8BF6B5E-5CEA-4A79-B955-11BC21D17D3A}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{735CFFB3-C1CF-4AA2-A5B6-2B41C7EFECD6}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,12 +41,6 @@ Global
 		{A8BF6B5E-5CEA-4A79-B955-11BC21D17D3A}.Release|x64.Build.0 = Release|Any CPU
 		{A8BF6B5E-5CEA-4A79-B955-11BC21D17D3A}.Release|x86.ActiveCfg = Release|Any CPU
 		{A8BF6B5E-5CEA-4A79-B955-11BC21D17D3A}.Release|x86.Build.0 = Release|Any CPU
-		{735CFFB3-C1CF-4AA2-A5B6-2B41C7EFECD6}.Debug|Any CPU.ActiveCfg = Debug
-		{735CFFB3-C1CF-4AA2-A5B6-2B41C7EFECD6}.Debug|x64.ActiveCfg = Debug
-		{735CFFB3-C1CF-4AA2-A5B6-2B41C7EFECD6}.Debug|x86.ActiveCfg = Debug
-		{735CFFB3-C1CF-4AA2-A5B6-2B41C7EFECD6}.Release|Any CPU.ActiveCfg = Release
-		{735CFFB3-C1CF-4AA2-A5B6-2B41C7EFECD6}.Release|x64.ActiveCfg = Release
-		{735CFFB3-C1CF-4AA2-A5B6-2B41C7EFECD6}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
