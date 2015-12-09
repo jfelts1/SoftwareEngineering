@@ -43,13 +43,10 @@ namespace FinalProjMediaPlayer
 
         private static IList<MediaEntry> searchForFilesAndGetInfo()
         {
-            //Jess' code starts here
             string[] mp3;
             string[] avi;
             searchForFiles(out mp3,out avi);
-            //Jess' code ends here
 
-            //Chelsea's code begins here
             IList<MediaEntry> mediaEntries = getMediaInfo(mp3,avi);
 
             return mediaEntries;
@@ -110,8 +107,6 @@ namespace FinalProjMediaPlayer
                     string album = Encoding.Default.GetString(tag.album).removeNullTerminater().removeControlCharacters();
                     string year = Encoding.Default.GetString(tag.year).removeNullTerminater().removeControlCharacters();
                     string comment = Encoding.Default.GetString(tag.comment).removeNullTerminater().removeControlCharacters();
-                    //string genre = Encoding.Default.GetString(tag.genre).removeNullTerminater().removeControlCharacters();
-                    //long Length = Encoding.Default.GetString(tag.)
 
                     if (string.IsNullOrEmpty(title))
                     {
@@ -205,7 +200,9 @@ namespace FinalProjMediaPlayer
             {
                 foreach (string t in mp3)
                 {
+#if DEBUG
                     Console.WriteLine(t);
+#endif
                     files.Add(t);
                 }
             }
